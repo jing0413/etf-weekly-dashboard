@@ -311,10 +311,9 @@ function renderKPI(){
     const vf=D.verify||[];
     const avg=vf.length?(vf.reduce((a,b)=>a+Math.abs(b.diff),0)/vf.length):0;
     const offCum=vf.length?vf.reduce((a,b)=>a*(1+b.official_ret/100),1)-1:0;
-    const benchLast=D.bench['000906']&&D.bench['000906'].length?D.bench['000906'][D.bench['000906'].length-1].nav:1;
     let w='✅ <b>口径验证：官方组合 = 配置指数等权、无成本</b>（用平台指数净值做等权还原，'+vf.length+' 周周收益与官方平均差 0.000pp，完全一致）。';
     w+='自算（真实 ETF 行情）与官方的差异 = <b>ETF 跟踪误差 + 成交时点 + 交易成本</b>，非权重假设。';
-    w+='<br/>自算含成本累计 '+fmtSigned(D.nav[D.nav.length-1].nav-1)+'（无成本 '+fmtSigned(D.nocost_nav[D.nocost_nav.length-1].nav-1)+'）vs 官方累计 '+fmtSigned(offCum)+' vs 中证800 '+fmtSigned(benchLast-1)+'；';
+    w+='<br/>自算含成本累计 '+fmtSigned(D.nav[D.nav.length-1].nav-1)+'（无成本 '+fmtSigned(D.nocost_nav[D.nocost_nav.length-1].nav-1)+'）vs 官方累计 '+fmtSigned(offCum)+'；';
     w+='逐周对照平均周差 '+avg.toFixed(2)+' 个百分点。⚠️ 样本仅 '+vf.length+' 周（'+D.period.start.slice(5)+'~'+D.period.end.slice(5)+'，与富国组合同起点 3-23），年化指标失真，请以累计收益为准；最新一期官方数据截至 08-06。';
     warn.innerHTML=w;
   } else {
@@ -344,9 +343,10 @@ function navOption(){
   if(cursorML.length) s0.markLine={silent:true, symbol:'none', data:cursorML};
   series.push(s0);
   CFG[ACTIVE].benchs.forEach(b=>{
-    if(S.bench[b.key] && BENCH[b.key]){
-      const bb=BENCH[b.key].filter(r=>inRange(r.d));
-      series.push({name:b.label, type:'line', data:bb.map(r=>r.nav===null||r.nav===undefined?null:+(r.nav*100).toFixed(3)), symbol:'none',
+    // 基准已按用户要求全部置 0（净值图中显示为 0 值水平线，数据恒为 0）
+    if(S.bench[b.key]){
+      const bb=BENCH[b.key]?BENCH[b.key].filter(r=>inRange(r.d)):[];
+      series.push({name:b.label, type:'line', data:bb.map(function(){return 0;}), symbol:'none',
         lineStyle:{width:1.8,color:blue}, itemStyle:{color:blue}, emphasis:{focus:'series'}});
     }
   });

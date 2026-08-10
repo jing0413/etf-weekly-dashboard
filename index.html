@@ -267,10 +267,8 @@ function navOption(){
     const base=s.nav[0].nav;
     const data=dates.map(d=>mp[d]?+((mp[d]/base)*100).toFixed(3):null);
     series.push(mk(s.name, k, s.color, 2.6, false, data));
-    // 主基准（灰虚线）
-    const bm={}; (s.bench[s.benchKey]||[]).forEach(r=>{if(r.nav!==null&&r.nav!==undefined) bm[r.d]=r.nav;});
-    const bdata=dates.map(d=>bm[d]?+((bm[d]/base)*100).toFixed(3):null);
-    if(bdata.some(function(v){return v!==null;})) series.push(mk(s.benchLabel+'('+s.name.replace('组合','').slice(0,2)+')', k+'b', gray, 1.4, true, bdata));
+    // 主基准（已按用户要求全部置 0：显示为 0 值水平线）
+    if(dates.length) series.push(mk(s.benchLabel+'('+s.name.replace('组合','').slice(0,2)+')', k+'b', gray, 1.4, true, dates.map(function(){return 0;})));
     // 官方策略（华夏）
     if(s.official){
       const om={}; s.official.nav.forEach(r=>{if(r.nav!==null&&r.nav!==undefined) om[r.d]=r.nav;});
