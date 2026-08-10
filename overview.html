@@ -111,10 +111,10 @@ footer { margin-top:30px; color:var(--sub); font-size:12px; text-align:center; }
 </div>
 
 <div class="card">
-<h2>净值曲线叠加对比 <span class="ctrl" id="benchCtrls"></span></h2>
+<h2>累计收益曲线对比 <span class="ctrl" id="benchCtrls"></span></h2>
 <div class="legend" id="navLegend"></div>
 <div id="navChart" class="chart"></div>
-<div class="note">各策略组合线（实线）+ 各自主基准（灰色虚线）+ 华夏官方策略（琥珀）；同区间 3-23 起归一为 100；拖拽底部滑块可筛选区间。</div>
+<div class="note">各策略组合线（实线）+ 各自主基准（灰色虚线）+ 华夏官方策略（琥珀）；同区间 3-23 起，累计收益从 0% 起算；拖拽底部滑块可筛选区间。</div>
 </div>
 
 <div class="card">
@@ -265,18 +265,24 @@ function navOption(){
     const s=S[k];
     const mp={}; s.nav.forEach(r=>{mp[r.d]=r.nav;});
     const base=s.nav[0].nav;
-    const data=dates.map(d=>mp[d]?+((mp[d]/base)*100).toFixed(3):null);
+    const data=dates.map(d=>mp[d]?+((mp[d]/base)*100-100).toFixed(3):null);
     series.push(mk(s.name, k, s.color, 2.6, false, data));
-    // 主基准（已按用户要求全部置 0：显示为 0 值水平线）
-    if(dates.length) series.push(mk(s.benchLabel+'('+s.name.replace('组合','').slice(0,2)+')', k+'b', gray, 1.4, true, dates.map(function(){return 0;})));
-    // 官方策略（华夏）
+    // 主基准（真实数据，自归一累计收益 %，0 起点）
+    const bm={}; (s.bench[s.benchKey]||[]).forEach(r=>{if(r.nav!==null&&r.nav!==undefined) bm[r.d]=r.nav;});
+    const bdays=Object.keys(bm).sort();
+    if(bdays.length){
+      const bf=bm[bdays[0]];
+      const bdata=dates.map(function(d){return bm[d]?+((bm[d]/bf)*100-100).toFixed(3):null;});
+      series.push(mk(s.benchLabel+'('+s.name.replace('组合','').slice(0,2)+')', k+'b', gray, 1.4, true, bdata));
+    }
+    // 官方策略（华夏，1.0 起点 → 累计收益 %）
     if(s.official){
       const om={}; s.official.nav.forEach(r=>{if(r.nav!==null&&r.nav!==undefined) om[r.d]=r.nav;});
-      const odata=dates.map(d=>om[d]?+((om[d]/base)*100).toFixed(3):null);
+      const odata=dates.map(d=>om[d]?+((om[d])*100-100).toFixed(3):null);
       series.push(mk(s.official.name, k+'o', amber, 1.6, true, odata));
     }
     // 调仓点
-    const pins=s.adjDates.filter(function(d){return dm[d];}).map(function(d){const mp2={};s.nav.forEach(r=>{mp2[r.d]=r.nav;});return {name:d, value:[d, +((mp2[d]/base)*100).toFixed(2)]};});
+    const pins=s.adjDates.filter(function(d){return dm[d];}).map(function(d){const mp2={};s.nav.forEach(r=>{mp2[r.d]=r.nav;});return {name:d, value:[d, +((mp2[d]/base)*100-100).toFixed(2)]};});
     series.push({name:s.name+'·调仓', type:'scatter', data:pins, symbol:'pin', symbolSize:22,
       itemStyle:{color:s.color, borderColor:'#fff', borderWidth:1}, z:20,
       tooltip:{formatter:function(p){return '调仓日：'+p.name;}}});
