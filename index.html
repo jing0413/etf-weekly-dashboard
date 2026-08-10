@@ -328,17 +328,26 @@ function renderRecent(){
 function monthChartOption(){
   const mmap={}; KEYS.forEach(k=>{periodRets(S[k].nav,'month').forEach(function(x){mmap[x.label]=1;});});
   const months=Object.keys(mmap).sort();
+  const shortOf=function(k){return k==='huaxia'?'华':'富';};
   const series=KEYS.map(k=>{
     const mp={}; periodRets(S[k].nav,'month').forEach(function(x){mp[x.label]=x.ret;});
-    return {name:S[k].name, type:'bar', barGap:'20%',
+    return {id:k, name:S[k].name, type:'bar', barGap:'20%',
       data:months.map(function(m){return mp[m]!==undefined?+(mp[m]*100).toFixed(3):null;}),
       itemStyle:{color:function(p){return p.value===null?'#ccc':(p.value>=0?up:down);}, borderRadius:[3,3,0,0]},
-      label:{show:true,position:'top',fontSize:9,formatter:function(p){return p.value===null?'':((p.value>=0?'+':'')+p.value.toFixed(1)+'%');}}};
+      // 柱顶 label：第一行策略简称（蓝/绿固定色，与柱身涨跌色独立）、第二行数值（默认随柱子涨跌色）
+      label:{show:true,position:'top',fontSize:9,lineHeight:12,
+        formatter:function(p){ if(p.value===null) return '';
+          const tag=p.seriesId==='huaxia'?'{hx|华}':'{fg|富}';
+          const sign=p.value>=0?'+':'';
+          return tag+'\n'+sign+p.value.toFixed(1)+'%'; },
+        rich:{ hx:{color:'#1e40af',fontWeight:600,fontSize:10},
+               fg:{color:'#047857',fontWeight:600,fontSize:10} } } };
   });
-  document.getElementById('monthNote').textContent='红色=当月上涨 · 绿色=当月下跌（按 A 股惯例）';
+  document.getElementById('monthNote').textContent='柱身红涨绿跌（按 A 股惯例）· 柱顶 华/富 标识策略身份';
   return {
     tooltip:{trigger:'axis', valueFormatter:function(v){return v===null||v===undefined?'—':v.toFixed(2)+'%';}},
-    legend:{data:KEYS.map(k=>S[k].name), top:0},
+    // 图例去掉（颜色仅表示涨跌，由柱身红/绿承担；策略身份由柱顶 H/F 标识承担，避免图例色块与柱色不一致误导）
+    legend:{show:false},
     grid:{left:56,right:24,top:34,bottom:34},
     xAxis:{type:'category', data:months.map(function(m){return m;}), axisLabel:{fontSize:11}},
     yAxis:{type:'value', axisLabel:{formatter:'{value}%',fontSize:11}, splitLine:{lineStyle:{color:'#f0f0f0'}}},
