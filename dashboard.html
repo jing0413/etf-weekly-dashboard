@@ -499,7 +499,9 @@ function retOption(){
   return {
     tooltip:{trigger:'axis', formatter:function(ps){
       const p=ps[0];
-      return (S.mode==='month'?p.name:'周起始 '+p.name)+'<br/>收益：'+fmtSigned(p.value)+'<br/>'+p.data.start+' ~ '+p.data.end;
+      // p.value 已是 x.ret*100（百分数），直接格式化，不再走 fmtSigned（避免双重 ×100）
+      const sign=p.value>=0?'+':'';
+      return (S.mode==='month'?p.name:'周起始 '+p.name)+'<br/>收益：'+sign+p.value.toFixed(2)+'%<br/>'+p.data.start+' ~ '+p.data.end;
     }},
     grid:{left:56,right:24,top:14,bottom:40},
     xAxis:{type:'category', data:pr.map(x=>labelFmt(x.label)), axisLabel:{fontSize:10, rotate:S.mode==='month'?0:45}},
