@@ -98,8 +98,8 @@ footer { margin-top:30px; color:var(--sub); font-size:12px; text-align:center; }
 .recent .blk h4 { font-size:14px; font-weight:700; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
 .recent .sec { font-size:12px; color:var(--sub); margin:10px 0 4px; font-weight:600; }
 .chip { display:inline-block; padding:2px 8px; border-radius:6px; background:#f3f4f6; font-size:12px; margin:2px 3px 2px 0; border:1px solid var(--line); }
-.chip.after { background:#e7f7ef; color:var(--down); border-color:#c9ecd9; }
-.chip.before { background:#fff1f2; color:var(--up); border-color:#fbd5d7; }
+.chip.after { background:#fff1f2; color:var(--up); border-color:#fbd5d7; }
+.chip.before { background:#e7f7ef; color:var(--down); border-color:#c9ecd9; }
 </style>
 </head>
 <body>
@@ -302,9 +302,8 @@ function navOption(){
 
 // ---------------- 最新调仓与当前持仓 ----------------
 function recentLabel(item){
-  // 华夏：指数名 · ETF名；富国：ETF名 (代码)
-  if(item.idx) return item.idx+' · '+item.name;
-  return item.name+(item.code?' ('+item.code+')':'');
+  // 只显示 ETF 标的与代码（不显示跟踪的指数名）
+  return item.name + (item.code ? ' (' + item.code + ')' : '');
 }
 function renderRecent(){
   const grid=document.getElementById('recentGrid');
