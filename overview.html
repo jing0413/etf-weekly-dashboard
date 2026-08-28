@@ -152,7 +152,7 @@ details.audit[open] summary { color:var(--ink); }
 <div class="card">
 <h2>最新调仓与当前持仓 <span class="ctrl"><span class="note" id="recentNote"></span></span></h2>
 <div class="recent" id="recentGrid"></div>
-<div class="note">每策略显示最近一期（每周一）的调入 / 调出 / 继续持有三栏；▲=本期调入，▼=本期调出。</div>
+<div class="note">每策略显示最近一期（每周一）的调入 / 调出与当前持仓；▲=本期调入，▼=本期调出。</div>
 </div>
 
 <div class="card">
@@ -380,7 +380,7 @@ function navOption(){
   };
 }
 
-// ---------------- 最新调仓与当前持仓（调入 / 调出 / 继续持有 三栏） ----------------
+// ---------------- 最新调仓与当前持仓（调入 / 调出 两栏） ----------------
 function recentLabel(item){
   // 只显示 ETF 标的与代码（不显示跟踪的指数名）
   return item.name + (item.code ? ' (' + item.code + ')' : '');
@@ -392,7 +392,6 @@ function renderRecent(){
     const added=(adj.added||[]).map(function(i){return '<span class="chip after" title="本期调入">▲ '+recentLabel(i)+'</span>';}).join('');
     const removed=(adj.removed||[]).map(function(i){return '<span class="chip before" title="本期调出">▼ '+recentLabel(i)+'</span>';}).join('');
     const holds=(s.holdingsNow||[]).map(function(h){return '<span class="chip">'+recentLabel(h)+'</span>';}).join('');
-    const unk=(s.unchanged||[]).map(function(u){return '<span class="chip hold" title="继续持有">'+recentLabel(u)+'</span>';}).join('');
     const holdN=(s.holdingsNow||[]).length;
     return '<div class="blk"><h4><span class="dot" style="background:'+s.color+'"></span>'+s.name+'<span class="note" style="font-weight:400">'+adj.date+' 生效</span></h4>'+
       '<div class="sec">本期调入（'+(adj.added||[]).length+'）</div>'+
@@ -400,7 +399,6 @@ function renderRecent(){
       '<div class="sec">本期调出（'+(adj.removed||[]).length+'）</div>'+
       '<div>'+(removed||'<span class="muted">—</span>')+'</div>'+
       (adj.reason?'<div class="note" style="margin-top:6px">理由：'+adj.reason+'</div>':'')+
-      '<div class="sec">继续持有（'+(s.unchanged||[]).length+'）</div><div>'+(unk||'<span class="muted">—</span>')+'</div>'+
       '<div class="sec">当前持仓（'+holdN+' 只）</div><div>'+holds+'</div></div>';
   }).join('');
   document.getElementById('recentNote').textContent='最新生效日：'+KEYS.map(function(k){return S[k].name.split('·')[0]+' '+S[k].latestAdj.date;}).join('；');
