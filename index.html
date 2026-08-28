@@ -278,7 +278,7 @@ function renderHero(){
     : '<span class="tag ok">风险可控</span> 未触发预警';
   const focusTxt=(h.focus||[]).map(function(f){return '<span class="chip">'+f+'</span>';}).join('');
   el.innerHTML='<h3>📌 本周核心结论</h3><div class="grid4">'+
-    '<div class="item"><div class="k">本周谁更强（近1月）</div><div class="v">'+leaderNm+' <small>领跑</small></div></div>'+
+    '<div class="item"><div class="k">谁更强（近1月）</div><div class="v">'+leaderNm+' <small>领跑</small></div></div>'+
     '<div class="item"><div class="k">是否调仓</div><div class="v">'+adjTxt+'</div></div>'+
     '<div class="item"><div class="k">风险信号</div><div class="v">'+riskTxt+'</div></div>'+
     '<div class="item"><div class="k">推荐关注</div><div class="v">'+focusTxt+'</div></div>'+
