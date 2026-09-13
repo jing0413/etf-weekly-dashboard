@@ -108,7 +108,7 @@ details.audit[open] summary { color:var(--ink); }
 <h2>累计收益曲线 vs 基准 <span class="ctrl" id="benchCtrls"></span></h2>
 <div class="legend" id="navLegend"></div>
 <div id="navChart" class="chart"></div>
-<div class="note">累计收益 KPI 与曲线以所选区间首日收盘净值归一为 0%，不计首日收益；含首日建仓收益见上方数据校核。点击调仓点查看调仓明细；拖拽底部滑块筛选区间。</div>
+<div class="note">累计收益与曲线从所选区间首日收盘算起（当日记为 0%，不含首日涨跌）；含首日建仓收益见上方数据校核。点击调仓点查看调仓明细；拖拽底部滑块筛选区间。</div>
 </div>
 
 <div class="card">
@@ -313,7 +313,7 @@ function renderKPI(){
     '<span class="stbadge '+(st.trend==='风险上升'?'trisk':st.trend==='趋势强'?'tstrong':'tshake')+'">'+(st.trend||'—')+'</span>'+
     ' <span class="note" style="font-weight:400">近1月 '+fmtSigned(M.ret_1m)+' · 近3月 '+fmtSigned(M.ret_3m)+' · 超额(中证800) '+fmtSigned(M.alpha_total)+'</span></div></span>';
   const kpis=[
-    {k:'累计收益<br><small>首日收盘归一</small>', v:fmtSigned(m.total), c:clsOf(m.total)},
+    {k:'累计收益', v:fmtSigned(m.total), c:clsOf(m.total)},
     {k:'年化收益', v:fmtSigned(m.ann), c:clsOf(m.ann)},
     {k:'最大回撤', v:fmtPct(m.maxdd), c:'down'},
     {k:'最大回撤日', v:M.max_dd_date||'—', c:'', small:1},
@@ -333,7 +333,7 @@ function renderKPI(){
     let w='✅ <b>口径验证</b>：官方组合=配置指数等权、无成本，'+vf.length+' 周周收益与官方完全一致；自算与官方的差异 = <b>ETF跟踪误差+成交时点+成本</b>，非权重假设。';
     const navFirst=D.nav[0].nav, navLast=D.nav[D.nav.length-1].nav;
     const ncFirst=D.nocost_nav[0].nav, ncLast=D.nocost_nav[D.nocost_nav.length-1].nav;
-    w+='<br/>全样本首日收盘归一：自算含成本 '+fmtSigned(navLast/navFirst-1)+'（无成本 '+fmtSigned(ncLast/ncFirst-1)+'），中证800 '+fmtSigned(benchLast-1)+'。';
+    w+='<br/>全样本从首日收盘起算（不含首日涨跌）：自算含成本 '+fmtSigned(navLast/navFirst-1)+'（无成本 '+fmtSigned(ncLast/ncFirst-1)+'），中证800 '+fmtSigned(benchLast-1)+'。';
     w+='<br/>初始资金 1.00 起算、含首日建仓收益：自算含成本 '+fmtSigned(navLast-1)+'（无成本 '+fmtSigned(ncLast-1)+'）；官方周收益连乘 '+fmtSigned(offCum)+'。两种起点不可直接相减；逐周平均周差 '+avg.toFixed(2)+'pp。⚠️ 样本 '+vf.length+' 周（'+D.period.start.slice(5)+'~'+D.period.end.slice(5)+'），年化指标失真，以累计收益为准。';
     warn.innerHTML=w;
   } else {
@@ -344,7 +344,7 @@ function renderKPI(){
       w+=' 富国声称口径：近1周 '+c1+' 次 / 近4周 '+c4+' 次，'+(c1>=c4?'更接近「近1周」':'更接近「近4周」')+'。';
     }
     const navFirst=D.nav[0].nav, navLast=D.nav[D.nav.length-1].nav;
-    w+='<br/>全样本首日收盘归一累计 '+fmtSigned(navLast/navFirst-1)+'；初始资金 1.00 起算、含首日建仓收益 '+fmtSigned(navLast-1)+'。';
+    w+='<br/>全样本从首日收盘起算（不含首日涨跌）累计 '+fmtSigned(navLast/navFirst-1)+'；初始资金 1.00 起算、含首日建仓收益 '+fmtSigned(navLast-1)+'。';
     warn.innerHTML=w;
   }
 }

@@ -165,7 +165,7 @@ details.audit[open] summary { color:var(--ink); }
 <h2>累计收益曲线对比 <span class="ctrl" id="benchCtrls"></span></h2>
 <div class="legend" id="navLegend"></div>
 <div id="navChart" class="chart"></div>
-<div class="note">华夏组合（红实线）、富国组合（蓝实线），统一基准：中证800（灰色虚线）；累计收益以首日收盘净值归一为 0%，不含首日收益；拖拽底部滑块可筛选区间。</div>
+<div class="note">华夏组合（红实线）、富国组合（蓝实线），统一基准：中证800（灰色虚线）；累计收益从首日收盘算起（当日记为 0%，不含首日涨跌）；拖拽底部滑块可筛选区间。</div>
 </div>
 
 <div class="card">
@@ -259,7 +259,7 @@ function renderCards(){
     const badge=(st.risk?'<span class="stbadge '+(riskCls[st.risk]||'balance')+'">'+st.risk+'</span> ':'')+
       (st.trend?'<span class="stbadge '+(trendCls[st.trend]||'tshake')+'">'+st.trend+'</span>':'');
     return '<div class="scard"><div class="nm"><span class="dot" style="background:'+s.color+'"></span>'+s.name+badge+'</div>'+
-      '<div class="note">累计收益（首日收盘归一）</div><div class="big '+clsOf(m.total_ret)+'">'+fmtSigned(m.total_ret)+'</div>'+
+      '<div class="note">累计收益</div><div class="big '+clsOf(m.total_ret)+'">'+fmtSigned(m.total_ret)+'</div>'+
       '<div class="meta"><span>近1月 <b>'+fmtSigned(m.ret_1m)+'</b></span><span>近3月 <b>'+fmtSigned(m.ret_3m)+'</b></span><span>超额(800) <b>'+fmtSigned(m.alpha_total)+'</b></span></div>'+
       '<div class="meta"><span>最大回撤 <b>'+fmtPct(m.max_dd)+'</b></span><span>仓位 <b>'+(s.holdingsNow? s.holdingsNow.length:0)+' 只</b></span><span>区间 <b>'+s.period.days+' 天</b></span></div>'+
       (m.max_dd_date?'<div class="meta">最大回撤日 '+(m.max_dd_date||'—')+' · 年化 '+fmtSigned(m.ann_ret)+'</div>':'')+
@@ -308,7 +308,7 @@ function renderMetrics(){
   const head=document.getElementById('mHead');
   head.innerHTML='<tr><th>指标</th>'+KEYS.map(k=>'<th>'+S[k].name+'</th>').join('')+'</tr>';
   const rows=[
-    {k:'累计收益（首日收盘归一）', f:function(s){return fmtSigned(s.metrics.total_ret);}, c:function(s){return clsOf(s.metrics.total_ret);}},
+    {k:'累计收益', f:function(s){return fmtSigned(s.metrics.total_ret);}, c:function(s){return clsOf(s.metrics.total_ret);}},
     {k:'年化收益', f:function(s){return fmtSigned(s.metrics.ann_ret);}, c:function(s){return clsOf(s.metrics.ann_ret);}},
     {k:'最大回撤', f:function(s){return fmtPct(s.metrics.max_dd);}, c:function(){return 'down';}},
     {k:'年化波动率', f:function(s){return fmtPct(s.metrics.vol);}, c:function(){return '';}},
