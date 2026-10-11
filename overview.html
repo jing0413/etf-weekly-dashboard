@@ -1559,6 +1559,13 @@ body {
 .v6-holdings-list code { white-space: nowrap; }
 @media(max-width: 640px) { .v3-strategy-control > button { flex: 1 1 45%; min-width: 0; } .v2-data-stamp { max-width: 240px; } }
 
+/* Four-strategy metrics share one panel with the comparison chart. */
+.v8-comparison-metrics { margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--line, #dedbd2); }
+.v8-comparison-metrics h3 { margin: 0 0 10px; font-size: 20px; }
+.v8-comparison-metrics .metrics-table { min-width: 940px; }
+.v8-metric-meta { display: block; color: #687783; font-size: 11px; margin-top: 6px; white-space: nowrap; font-weight: 400; }
+.v8-metric-date { white-space: nowrap; }
+
   </style>
 </head>
 <body>
@@ -3987,7 +3994,8 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
     };
   }
   function PortalComparisonChart({
-    strategies
+    strategies,
+    children
   }) {
     const stageRef = useRef(null);
     const comparison = useMemo(() => prepareComparison(strategies), [strategies]);
@@ -4081,11 +4089,11 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
       className: "v2-eyebrow"
     }, "PERFORMANCE COMPARISON"), /*#__PURE__*/React.createElement("h2", {
       id: "portal-performance-title"
-    }, "\u591A\u7B56\u7565\u8D70\u52BF\u5BF9\u7167")), /*#__PURE__*/React.createElement("p", null, "\u5168\u90E8\u7B56\u7565\u6309\u5171\u540C\u4EA4\u6613\u65E5\u5BF9\u9F50\uFF0C\u533A\u95F4\u9996\u65E5\u5F52\u96F6\uFF1B\u4EC5\u5207\u6362\u663E\u9690\u4E0D\u6539\u53D8\u533A\u95F4\u3002")), /*#__PURE__*/React.createElement("p", {
+    }, "\u7B56\u7565\u6307\u6807\u4E0E\u8D70\u52BF\u5BF9\u7167")), /*#__PURE__*/React.createElement("p", null, "\u5168\u90E8\u7B56\u7565\u6309\u5171\u540C\u4EA4\u6613\u65E5\u5BF9\u9F50\uFF0C\u533A\u95F4\u9996\u65E5\u5F52\u96F6\uFF1B\u4EC5\u5207\u6362\u663E\u9690\u4E0D\u6539\u53D8\u533A\u95F4\u3002")), /*#__PURE__*/React.createElement("p", {
       className: "v7-source-warning"
     }, "\u53E3\u5F84\u63D0\u793A\uFF1A\u56FD\u4FE1\u3001\u534E\u798F\u4E3A\u5B98\u65B9\u5C55\u793A\u51C0\u503C\uFF0C\u534E\u590F\u3001\u5BCC\u56FD\u4E3A\u7F51\u7AD9\u81EA\u7B97\u56DE\u6D4B\uFF1B\u6570\u636E\u6765\u6E90\u3001\u8D39\u7528\u4E0E\u6210\u4EA4\u89C4\u5219\u4E0D\u540C\u3002\u66F2\u7EBF\u4EC5\u7528\u4E8E\u8D70\u52BF\u89C2\u5BDF\uFF0C\u4E0D\u4EE3\u8868\u540C\u53E3\u5F84\u6536\u76CA\u6392\u540D\u3002"), /*#__PURE__*/React.createElement("div", {
       className: "panel v5-comparison-panel"
-    }, /*#__PURE__*/React.createElement("div", {
+    }, children, /*#__PURE__*/React.createElement("div", {
       className: "v5-comparison-toolbar"
     }, /*#__PURE__*/React.createElement("div", {
       className: "v5-comparison-period"
@@ -4502,46 +4510,58 @@ function PortalPage({
   }), /*#__PURE__*/React.createElement(PortalPortfolioBoard, {
     strategies: data.strategies,
     onOpenResearch: onOpenResearch
-  }), /*#__PURE__*/React.createElement(BrokerageSummary, {
-    strategies: data.strategies
   }), /*#__PURE__*/React.createElement(PortalComparisonChart, {
     strategies: data.strategies
-  }), /*#__PURE__*/React.createElement(Footer, {
+  }, /*#__PURE__*/React.createElement(BrokerageSummary, {
+    strategies: data.strategies,
+    allStrategies: true,
+    embedded: true
+  })), /*#__PURE__*/React.createElement(Footer, {
     meta: data.meta
   }));
 }
 function BrokerageSummary({
-  strategies
+  strategies,
+  allStrategies = false,
+  embedded = false
 }) {
-  const entries = Object.values(strategies || {}).filter(s => s.kind === "brokerage");
+  const entries = Object.values(strategies || {}).filter(s => allStrategies || s.kind === "brokerage");
   if (!entries.length) return null;
   return /*#__PURE__*/React.createElement("section", {
-    className: "panel panel-pad v7-brokerage-summary",
-    "aria-label": "\u56FD\u4FE1\u4E0E\u534E\u798F\u5B98\u65B9\u6307\u6807\u6BD4\u8F83"
-  }, /*#__PURE__*/React.createElement("div", {
+    className: embedded ? "v8-comparison-metrics" : "panel panel-pad v7-brokerage-summary",
+    "aria-label": allStrategies ? "四策略指标对照" : "国信与华福官方指标比较"
+  }, !embedded && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "v2-eyebrow"
-  }, "MONTHLY PORTFOLIOS"), /*#__PURE__*/React.createElement("h2", null, "\u56FD\u4FE1\u4E0E\u534E\u798F \xB7 \u5B98\u65B9\u6307\u6807"), /*#__PURE__*/React.createElement("p", {
+  }, "MONTHLY PORTFOLIOS"), /*#__PURE__*/React.createElement("h2", null, "\u56FD\u4FE1\u4E0E\u534E\u798F \xB7 \u5B98\u65B9\u6307\u6807")), embedded && /*#__PURE__*/React.createElement("h3", null, "\u7B56\u7565\u6307\u6807"), /*#__PURE__*/React.createElement("p", {
     className: "muted small"
-  }, "\u6210\u7ACB\u4EE5\u6765\u533A\u95F4 ", entries[0].period.start, " \u2014 ", entries[0].dataAsOf, "\u3002\u91C7\u7528\u5B98\u65B9\u62AB\u9732\u503C\uFF1B\u4E0D\u4E0E\u5468\u5EA6\u81EA\u7B97\u56DE\u6D4B\u5408\u5E76\u6392\u540D\u3002"), /*#__PURE__*/React.createElement("div", {
-    className: "metrics-scroll"
+  }, "\u8868\u683C\u4FDD\u7559\u5404\u7B56\u7565\u539F\u59CB\u7EDF\u8BA1\u533A\u95F4\uFF1B\u7D2F\u8BA1\u6536\u76CA\u3001\u6700\u5927\u56DE\u64A4\u548C\u590F\u666E\u5BF9\u5E94\u5404\u884C\u6240\u5217\u533A\u95F4\u3002", embedded && "下方曲线统一到共同交易日，区间不同，末值可能与表格不同。"), /*#__PURE__*/React.createElement("div", {
+    className: "metrics-scroll",
+    tabIndex: "0",
+    "aria-label": "\u53EF\u6A2A\u5411\u6EDA\u52A8\u7684\u7B56\u7565\u6307\u6807\u8868"
   }, /*#__PURE__*/React.createElement("table", {
     className: "metrics-table"
-  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "\u7EC4\u5408"), /*#__PURE__*/React.createElement("th", null, "\u8FD11\u6708"), /*#__PURE__*/React.createElement("th", null, "\u8FD13\u6708"), /*#__PURE__*/React.createElement("th", null, "\u8FD16\u6708"), /*#__PURE__*/React.createElement("th", null, "\u6210\u7ACB\u4EE5\u6765"), /*#__PURE__*/React.createElement("th", null, "\u6700\u5927\u56DE\u64A4"), /*#__PURE__*/React.createElement("th", null, "\u590F\u666E"), /*#__PURE__*/React.createElement("th", null, "\u6307\u6807\u622A\u6B62\u65E5"))), /*#__PURE__*/React.createElement("tbody", null, entries.map(s => /*#__PURE__*/React.createElement("tr", {
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "\u7B56\u7565 / \u53E3\u5F84"), /*#__PURE__*/React.createElement("th", null, "\u8FD11\u6708"), /*#__PURE__*/React.createElement("th", null, "\u8FD13\u6708"), /*#__PURE__*/React.createElement("th", null, "\u8FD16\u6708"), /*#__PURE__*/React.createElement("th", null, "\u533A\u95F4\u7D2F\u8BA1\u6536\u76CA"), /*#__PURE__*/React.createElement("th", null, "\u6700\u5927\u56DE\u64A4"), /*#__PURE__*/React.createElement("th", null, "\u590F\u666E"), /*#__PURE__*/React.createElement("th", null, "\u7EDF\u8BA1\u533A\u95F4"))), /*#__PURE__*/React.createElement("tbody", null, entries.map(s => /*#__PURE__*/React.createElement("tr", {
     key: s.key
   }, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("strong", {
     style: {
       color: s.color
     }
-  }, s.name)), ['ret_1m', 'ret_3m', 'ret_6m', 'total_ret', 'max_dd'].map(k => /*#__PURE__*/React.createElement("td", {
+  }, s.name), /*#__PURE__*/React.createElement("small", {
+    className: "v8-metric-meta"
+  }, s.kind === "brokerage" ? "月度 · 官方展示" : "周度 · 自算回测")), ['ret_1m', 'ret_3m', 'ret_6m', 'total_ret', 'max_dd'].map(k => /*#__PURE__*/React.createElement("td", {
     key: k,
     className: valueClass(s.metrics[k])
-  }, fmtPct(s.metrics[k], 2))), /*#__PURE__*/React.createElement("td", null, s.metrics.sharpe?.toFixed(2) || '—'), /*#__PURE__*/React.createElement("td", null, s.dataAsOf)))))), /*#__PURE__*/React.createElement("p", {
+  }, fmtPct(s.metrics[k], 2))), /*#__PURE__*/React.createElement("td", null, typeof s.metrics.sharpe === 'number' ? s.metrics.sharpe.toFixed(2) : '—'), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {
+    className: "v8-metric-date"
+  }, s.period?.start || '—'), /*#__PURE__*/React.createElement("small", {
+    className: "v8-metric-meta"
+  }, "\u81F3 ", s.dataAsOf || s.period?.end || '—'))))))), /*#__PURE__*/React.createElement("p", {
     className: "muted small"
-  }, "\u6210\u7ACB\u672A\u6EE1\u4E00\u5E74\uFF0C\u4E0D\u5C55\u793A\u5E74\u5316\u6536\u76CA\u3002", /*#__PURE__*/React.createElement("a", {
-    href: entries[0].sourceUrl,
+  }, "\u2014 \u8868\u793A\u672A\u63D0\u4F9B\u8BE5\u9879\u6307\u6807\uFF0C\u4E0D\u6309\u96F6\u8BA1\u7B97\u3002", /*#__PURE__*/React.createElement("a", {
+    href: entries.find(s => s.sourceUrl)?.sourceUrl,
     target: "_blank",
     rel: "noreferrer"
-  }, "\u67E5\u770B\u534E\u590F\u5E73\u53F0\u539F\u59CB\u6570\u636E \u2197")));
+  }, "\u56FD\u4FE1\u3001\u534E\u798F\u5B98\u65B9\u6570\u636E\u6765\u6E90 \u2197")));
 }
 function EvidenceSummary({
   strategy
