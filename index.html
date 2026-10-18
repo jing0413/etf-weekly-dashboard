@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light" />
-  <meta name="description" content="周度策略与国信、华福月度组合的调仓、持仓、官方绩效和历史走势；数据日期按各策略分别标注" />
-  <title>ETF 研究工具箱 · 调仓持仓合并版 V6</title>
+  <meta name="description" content="跟踪 ETF 策略信号，验证历史表现，并查找对应产品" />
+  <title>ETF 研究工具箱｜策略跟踪与产品筛选</title>
   <link rel="icon" href="data:," />
   <style>
 /* styles.css */
@@ -1565,6 +1565,232 @@ body {
 .v8-comparison-metrics .metrics-table { min-width: 940px; }
 .v8-metric-meta { display: block; color: #687783; font-size: 11px; margin-top: 6px; white-space: nowrap; font-weight: 400; }
 .v8-metric-date { white-space: nowrap; }
+
+/* styles-v7.css */
+.v7-app .v3-portal-hero { min-height: 340px; }
+.v7-app .v3-portal-hero .v2-hero-copy { padding: clamp(34px, 4vw, 54px); }
+.v7-app .v3-portal-hero .v2-hero-copy h1 {
+  max-width: 820px;
+  margin: 14px 0 14px;
+  font-size: clamp(42px, 4.25vw, 61px);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+.v7-app .v3-portal-hero .v2-hero-copy > p {
+  max-width: 700px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.v7-app .v2-button { min-height: 44px; }
+.v7-app .v2-week-summary {
+  align-content: center;
+  padding: clamp(28px, 3.4vw, 44px);
+}
+.v7-app .v2-summary-head { align-items: baseline; }
+.v7-app .v2-summary-head span { font-size: 23px; }
+.v7-app .v2-signal-row { grid-template-columns: 46px minmax(0, 1fr); }
+.v7-app .v2-signal-row { padding: 14px 0; }
+.v7-app .v2-signal-row p { font-size: 12px; line-height: 1.65; }
+
+.v7-consensus-section { scroll-margin-top: 82px; }
+.v7-insight-grid {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 14px;
+}
+.v7-insight-card {
+  display: grid;
+  align-content: start;
+  min-width: 0;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--line-strong);
+}
+.v7-insight-primary { border-top-color: var(--blue); }
+.v7-card-index {
+  margin-bottom: 32px;
+  color: var(--blue);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+.v7-insight-card h3 {
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-size: 22px;
+}
+.v7-insight-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.75;
+}
+.v7-theme-list {
+  display: grid;
+  gap: 0;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.v7-theme-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+.v7-theme-list strong { font-size: 13px; }
+.v7-theme-list span { color: var(--blue); font-family: var(--mono); font-size: 10px; }
+.v7-theme-list small { grid-column: 1 / -1; color: var(--muted); font-size: 10px; line-height: 1.5; }
+.v7-direction-list {
+  display: grid;
+  gap: 12px;
+  margin: 22px 0 0;
+}
+.v7-direction-list div { padding-top: 11px; border-top: 1px solid var(--line); }
+.v7-direction-list dt { margin-bottom: 5px; color: var(--muted); font-size: 10px; }
+.v7-direction-list dd { margin: 0; color: var(--ink-2); font-size: 12px; line-height: 1.65; }
+.v7-date-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 24px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.v7-date-pair span { display: grid; gap: 7px; padding: 13px; background: #fbfaf6; }
+.v7-date-pair small { color: var(--muted); font-size: 9px; }
+.v7-date-pair strong { font-family: var(--mono); font-size: 11px; }
+
+.v7-finder {
+  display: grid;
+  grid-template-columns: minmax(280px, .74fr) minmax(420px, 1.26fr);
+  gap: clamp(26px, 5vw, 74px);
+  align-items: center;
+  padding: clamp(30px, 4vw, 52px);
+  color: white;
+  background: var(--blue-dark);
+  border-top: 5px solid #80a6ff;
+}
+.v7-finder h2 {
+  margin: 9px 0 12px;
+  font-size: clamp(28px, 3vw, 40px);
+}
+.v7-finder-copy > p {
+  max-width: 560px;
+  margin: 0;
+  color: rgba(255,255,255,.72);
+  font-size: 13px;
+  line-height: 1.8;
+}
+.v7-finder-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 24px;
+}
+.v7-finder-stats span { color: rgba(255,255,255,.62); font-size: 10px; }
+.v7-finder-stats strong { margin-right: 5px; color: white; font-family: var(--mono); font-size: 15px; }
+.v7-finder-action { min-width: 0; }
+.v7-finder-action form { display: grid; gap: 9px; }
+.v7-finder-action label { color: #adc5ff; font-size: 10px; letter-spacing: .08em; }
+.v7-finder-action form > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+.v7-finder-action input {
+  min-width: 0;
+  min-height: 54px;
+  padding: 0 17px;
+  color: var(--ink);
+  border: 0;
+  border-radius: 0;
+  background: white;
+  font-size: 14px;
+}
+.v7-finder-action input::placeholder { color: #8b98a2; }
+.v7-finder-action form button {
+  min-height: 54px;
+  padding: 0 20px;
+  color: white;
+  border: 1px solid #80a6ff;
+  background: var(--blue);
+  cursor: pointer;
+  font-weight: 700;
+}
+.v7-finder-action form button:hover { background: #3268dd; }
+.v7-hot-themes { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 14px; }
+.v7-hot-themes > span { margin-right: 3px; color: rgba(255,255,255,.58); font-size: 10px; }
+.v7-hot-themes button {
+  min-height: 34px;
+  padding: 0 11px;
+  color: rgba(255,255,255,.84);
+  border: 1px solid rgba(255,255,255,.22);
+  background: transparent;
+  cursor: pointer;
+  font-size: 11px;
+}
+.v7-hot-themes button:hover { color: white; border-color: #80a6ff; background: rgba(255,255,255,.06); }
+
+.v7-method { padding-top: 2px; }
+.v7-method-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.v7-method-grid article {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 230px;
+  padding: 24px;
+  border-right: 1px solid var(--line);
+}
+.v7-method-grid article:last-child { border-right: 0; }
+.v7-method-grid article > span { color: var(--blue); font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: .1em; }
+.v7-method-grid h3 { margin: 13px 0 9px; font-family: var(--serif); font-size: 20px; }
+.v7-method-grid p { margin: 0 0 22px; color: var(--muted); font-size: 12px; line-height: 1.75; }
+.v7-method-grid small,
+.v7-method-grid a { margin-top: auto; color: var(--ink-2); font-family: var(--mono); font-size: 10px; }
+.v7-method-grid a { color: var(--blue); }
+.v7-method-note {
+  margin: 0;
+  padding: 15px 18px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-top: 0;
+  background: #f8f6f0;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+@media (max-width: 1080px) {
+  .v7-insight-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .v7-insight-primary { grid-row: span 2; }
+  .v7-finder { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .v7-app .v3-portal-hero .v2-hero-copy h1 { font-size: clamp(38px, 10vw, 52px); }
+  .v7-insight-grid { grid-template-columns: 1fr; }
+  .v7-insight-primary { grid-row: auto; }
+  .v7-insight-card { min-height: 0; padding: 20px; }
+  .v7-card-index { margin-bottom: 22px; }
+  .v7-finder { padding: 26px 20px; }
+  .v7-method-grid { grid-template-columns: 1fr; }
+  .v7-method-grid article { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .v7-method-grid article:last-child { border-bottom: 0; }
+}
+
+@media (max-width: 520px) {
+  .v7-finder-action form > div { grid-template-columns: 1fr; gap: 8px; }
+  .v7-finder-action form button { width: 100%; }
+  .v7-finder-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .v7-date-pair { grid-template-columns: 1fr; }
+  .v7-hot-themes > span { width: 100%; }
+}
 
   </style>
 </head>
@@ -3337,7 +3563,7 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
     PeriodReturnChart
   };
 })();
-/* etf-filter-v4.js */
+/* etf-filter-v7.js */
 (function () {
   const {
     useEffect,
@@ -3739,12 +3965,14 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
     }, showAll ? "收起后续结果" : `展开全部 ${results.length} 个指数`)));
   }
   function ScreenBrowser({
-    data
+    data,
+    initialQuery = "",
+    initialIndustry = ""
   }) {
-    const [industry, setIndustry] = useState("");
+    const [industry, setIndustry] = useState(initialIndustry);
     const [subIndustry, setSubIndustry] = useState("");
     const [role, setRole] = useState("");
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState(initialQuery);
     const [expandedIndustries, setExpandedIndustries] = useState(() => new Set());
     const [expandedIndices, setExpandedIndices] = useState(() => new Set());
     const [compare, setCompare] = useState([]);
@@ -3884,7 +4112,9 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
   }
   function ETFFilterPage({
     data,
-    source
+    source,
+    initialQuery = "",
+    initialIndustry = ""
   }) {
     const [mode, setMode] = useState(() => {
       try {
@@ -3939,7 +4169,9 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
       "aria-selected": mode === "stock",
       onClick: () => setMode("stock")
     }, /*#__PURE__*/React.createElement("span", null, "02"), "\u6309\u80A1\u7968\u67E5\u627E")), mode === "screen" ? /*#__PURE__*/React.createElement(ScreenBrowser, {
-      data: data
+      data: data,
+      initialQuery: initialQuery,
+      initialIndustry: initialIndustry
     }) : /*#__PURE__*/React.createElement(StockFinder, {
       data: data
     }), /*#__PURE__*/React.createElement("details", {
@@ -3948,7 +4180,7 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
       className: "v2-footer"
     }, /*#__PURE__*/React.createElement("span", null, "ETF \u7814\u7A76\u5DE5\u5177\u7BB1 \xB7 \u5168\u7AD9\u6574\u5408\u7248"), /*#__PURE__*/React.createElement("span", null, "\u4EA7\u54C1\u7B5B\u9009\u5FEB\u7167 ", data.meta?.asOf || "—", " \xB7 \u4EC5\u4F9B\u7814\u7A76\u53C2\u8003")));
   }
-  window.ETFFilterV4 = {
+  window.ETFFilterV7 = {
     ETFFilterPage
   };
 })();
@@ -4294,7 +4526,7 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
     PortalPortfolioBoard
   };
 })();
-/* app-v6.js */
+/* app-v7.js */
 const {
   useEffect,
   useMemo,
@@ -4314,7 +4546,7 @@ const {
 } = window.ETFChartsV3;
 const {
   ETFFilterPage
-} = window.ETFFilterV4;
+} = window.ETFFilterV7;
 const {
   PortalComparisonChart
 } = window.ETFPortalV5;
@@ -4371,6 +4603,8 @@ function Header({
   onNavigate,
   meta
 }) {
+  const monthlyStrategies = Object.values(window.__brokerageData || {});
+  const monthlyConfigDate = monthlyStrategies.map(strategy => strategy.latestAdj?.date || "").sort().at(-1) || "—";
   return /*#__PURE__*/React.createElement("header", {
     className: "v2-header v3-header"
   }, /*#__PURE__*/React.createElement("div", {
@@ -4397,7 +4631,7 @@ function Header({
     onClick: () => onNavigate("screen")
   }, "ETF \u7B5B\u9009")), /*#__PURE__*/React.createElement("div", {
     className: "v2-data-stamp"
-  }, /*#__PURE__*/React.createElement("span", null, "\u5468\u5EA6\u5FEB\u7167 / \u6708\u5EA6\u5B98\u65B9"), /*#__PURE__*/React.createElement("strong", null, meta?.end || "—", " / ", Object.values(window.__brokerageData || {})[0]?.dataAsOf || "—"))));
+  }, /*#__PURE__*/React.createElement("span", null, "\u5468\u5EA6\u6570\u636E / \u6708\u5EA6\u914D\u7F6E"), /*#__PURE__*/React.createElement("strong", null, meta?.end || "—", " / ", monthlyConfigDate))));
 }
 function PrimaryButton({
   children,
@@ -4450,18 +4684,59 @@ function SignalRow({
     className: "v2-risk-dot"
   }), children));
 }
+const THEME_RULES = [["半导体", /(半导体|芯片|集成电路)/], ["银行", /银行/], ["煤炭", /煤炭/], ["地产", /(房地产|地产)/], ["医药", /(医药|创新药|生物科技|医疗)/], ["能源电力", /(石油|电力|绿色电力|能源)/], ["有色金属", /(有色|稀土)/], ["人工智能", /(人工智能|AI)/i], ["金融科技", /金融科技/], ["化工材料", /(化工|建材)/]];
+function themeFor(item) {
+  const text = `${item?.name || ""} ${item?.idx || item?.idx_name || ""}`;
+  return THEME_RULES.find(([, pattern]) => pattern.test(text))?.[0] || "";
+}
+function portalInsights(strategiesMap) {
+  const entries = Object.entries(strategiesMap || {});
+  const weekly = entries.filter(([, strategy]) => strategy.kind !== "brokerage");
+  const monthly = entries.filter(([, strategy]) => strategy.kind === "brokerage");
+  const themeMap = new Map();
+  entries.forEach(([key, strategy]) => {
+    const seen = new Set();
+    (strategy.holdingsNow || []).forEach(holding => {
+      const theme = themeFor(holding);
+      if (theme) seen.add(theme);
+    });
+    seen.forEach(theme => {
+      if (!themeMap.has(theme)) themeMap.set(theme, []);
+      themeMap.get(theme).push({
+        key,
+        name: strategy.name
+      });
+    });
+  });
+  const sharedThemes = [...themeMap.entries()].filter(([, owners]) => owners.length > 1).sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0], "zh-CN"));
+  const weeklyAdded = weekly.flatMap(([, strategy]) => strategy.latestAdj?.added || []);
+  const weeklyRemoved = weekly.flatMap(([, strategy]) => strategy.latestAdj?.removed || []);
+  const addedThemes = [...new Set(weeklyAdded.map(themeFor).filter(Boolean))];
+  const removedThemes = [...new Set(weeklyRemoved.map(themeFor).filter(Boolean))];
+  const weeklyDates = weekly.map(([, strategy]) => strategy.latestAdj?.date || "").filter(Boolean).sort();
+  const monthlyDates = monthly.map(([, strategy]) => strategy.latestAdj?.date || "").filter(Boolean).sort();
+  const defensive = weekly.filter(([, strategy]) => strategy.metrics?.status?.risk === "防守").length;
+  return {
+    weekly,
+    monthly,
+    sharedThemes,
+    weeklyAdded,
+    weeklyRemoved,
+    addedThemes,
+    removedThemes,
+    defensive,
+    latestWeeklyDate: weeklyDates.at(-1) || "—",
+    latestMonthlyDate: monthlyDates.at(-1) || "—"
+  };
+}
 function PortalHero({
   data,
   onResearch,
   onScreen
 }) {
   const strategies = Object.values(data.strategies || {});
-  const adjustments = strategies.map(strategy => strategy.latestAdj || {});
-  const newestDate = adjustments.map(adj => adj.date || "").sort().at(-1) || data.meta?.end || "—";
-  const changedCount = adjustments.filter(adj => (adj.added?.length || 0) + (adj.removed?.length || 0) > 0).length;
-  const defensiveCount = strategies.filter(strategy => strategy.metrics?.status?.risk === "防守").length;
-  const totalHoldings = strategies.reduce((sum, strategy) => sum + (strategy.holdingsNow?.length || 0), 0);
-  const focus = data.meta?.hero?.focus || [];
+  const insights = portalInsights(data.strategies);
+  const topTheme = insights.sharedThemes[0];
   return /*#__PURE__*/React.createElement("section", {
     className: "v2-portal-hero v3-portal-hero",
     "aria-labelledby": "portal-title"
@@ -4469,32 +4744,148 @@ function PortalHero({
     className: "v2-hero-copy"
   }, /*#__PURE__*/React.createElement("div", {
     className: "v2-kicker"
-  }, "WEEKLY STRATEGY BRIEF"), /*#__PURE__*/React.createElement("h1", {
+  }, "ETF STRATEGY RESEARCH"), /*#__PURE__*/React.createElement("h1", {
     id: "portal-title"
-  }, strategies.length, " \u5957\u7B56\u7565\uFF0C", /*#__PURE__*/React.createElement("br", null), "\u4E00\u4E2A\u7814\u7A76\u5165\u53E3\u3002"), /*#__PURE__*/React.createElement("p", null, "\u5468\u5EA6\u914D\u7F6E\u4E0E\u56FD\u4FE1\u3001\u534E\u798F\u6708\u5EA6\u7EC4\u5408\u96C6\u4E2D\u8DDF\u8E2A\u3002\u67E5\u770B\u5404\u671F\u8C03\u4ED3\u3001\u6301\u4ED3\u6743\u91CD\u4E0E\u5386\u53F2\u8D70\u52BF\uFF1B\u4E0D\u540C\u6765\u6E90\u4FDD\u7559\u5404\u81EA\u53E3\u5F84\u3002"), /*#__PURE__*/React.createElement("div", {
+  }, "\u8DDF\u8E2A\u7B56\u7565\uFF0C\u9A8C\u8BC1\u8868\u73B0\uFF0C", /*#__PURE__*/React.createElement("br", null), "\u7B5B\u9009 ETF\u3002"), /*#__PURE__*/React.createElement("p", null, "\u96C6\u4E2D\u67E5\u770B\u8C03\u4ED3\u3001\u6301\u4ED3\u4E0E\u6536\u76CA\u56DE\u64A4\uFF0C\u5E76\u6BD4\u8F83\u540C\u7C7B ETF\u3002"), /*#__PURE__*/React.createElement("div", {
     className: "v2-hero-actions"
   }, /*#__PURE__*/React.createElement(PrimaryButton, {
     onClick: () => onResearch("research-action")
-  }, "\u8FDB\u5165\u7B56\u7565\u7814\u7A76"), /*#__PURE__*/React.createElement("button", {
+  }, "\u770B\u672C\u671F\u8C03\u4ED3"), /*#__PURE__*/React.createElement("button", {
     className: "v2-button secondary",
     type: "button",
-    onClick: onScreen
+    onClick: () => onScreen({})
   }, "\u7B5B\u9009 ETF ", /*#__PURE__*/React.createElement("span", {
     "aria-hidden": "true"
   }, "\u2192")))), /*#__PURE__*/React.createElement("div", {
     className: "v2-week-summary"
   }, /*#__PURE__*/React.createElement("div", {
     className: "v2-summary-head"
-  }, /*#__PURE__*/React.createElement("span", null, "\u6700\u65B0\u914D\u7F6E\u5FEB\u7167"), /*#__PURE__*/React.createElement("time", null, newestDate)), /*#__PURE__*/React.createElement(SignalRow, {
-    label: "\u8C03\u4ED3"
-  }, "\u5468\u5EA6\u7B56\u7565\u4E0E\u6708\u5EA6\u7EC4\u5408\u5206\u522B\u5C55\u793A\u751F\u6548\u65E5\uFF0C\u6700\u65B0\u914D\u7F6E\u89C1\u4E0B\u65B9\u5361\u7247"), /*#__PURE__*/React.createElement(SignalRow, {
-    label: "\u6301\u4ED3"
-  }, strategies.length, " \u5957\u7B56\u7565\u5408\u8BA1 ", totalHoldings, " \u4E2A\u6301\u4ED3\u4F4D"), /*#__PURE__*/React.createElement(SignalRow, {
-    label: "\u53E3\u5F84"
-  }, "\u5468\u5EA6\u7B56\u7565\u4E3A\u81EA\u7B97\u56DE\u6D4B\uFF1B\u56FD\u4FE1\u3001\u534E\u798F\u4E3A\u5B98\u65B9\u5C55\u793A\uFF0C\u8D39\u7528\u4E0E\u6210\u4EA4\u89C4\u5219\u672A\u62AB\u9732")));
+  }, /*#__PURE__*/React.createElement("span", null, "\u672C\u671F\u6458\u8981"), /*#__PURE__*/React.createElement("time", null, data.meta?.end || "—")), /*#__PURE__*/React.createElement(SignalRow, {
+    label: "\u5468\u5EA6",
+    risk: true
+  }, insights.defensive === insights.weekly.length ? `${insights.weekly.length} 套策略均为防守` : `${insights.defensive}/${insights.weekly.length} 套策略为防守`, " \xB7 ", insights.weeklyAdded.length, " \u5165 ", insights.weeklyRemoved.length, " \u51FA \xB7 ", insights.latestWeeklyDate, " \u751F\u6548"), /*#__PURE__*/React.createElement(SignalRow, {
+    label: "\u5171\u8BC6"
+  }, topTheme ? `${topTheme[0]}覆盖 ${topTheme[1].length} 套策略` : "暂无明显共同暴露"), /*#__PURE__*/React.createElement(SignalRow, {
+    label: "\u6708\u5EA6"
+  }, insights.monthly.length, " \u5957\u673A\u6784\u7EC4\u5408 \xB7 ", insights.latestMonthlyDate, " \u751F\u6548")));
+}
+function ConsensusSection({
+  strategies
+}) {
+  const insights = portalInsights(strategies);
+  const shared = insights.sharedThemes.slice(0, 5);
+  const addText = insights.addedThemes.slice(0, 5).join("、") || "无可识别主题";
+  const removeText = insights.removedThemes.slice(0, 5).join("、") || "无可识别主题";
+  return /*#__PURE__*/React.createElement("section", {
+    className: "v5-portal-section v7-consensus-section",
+    "aria-labelledby": "portal-consensus-title"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "v5-section-heading"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "v2-eyebrow"
+  }, "CONSENSUS & DIVERGENCE"), /*#__PURE__*/React.createElement("h2", {
+    id: "portal-consensus-title"
+  }, "\u7B56\u7565\u5171\u8BC6\u4E0E\u5206\u6B67")), /*#__PURE__*/React.createElement("p", null, "\u53EA\u5F52\u7EB3\u5F53\u524D\u6301\u4ED3\u548C\u672C\u671F\u8C03\u4ED3\uFF0C\u4E0D\u5C06\u4E0D\u540C\u9891\u7387\u3001\u4E0D\u540C\u53E3\u5F84\u5408\u6210\u6295\u8D44\u5EFA\u8BAE\u3002")), /*#__PURE__*/React.createElement("div", {
+    className: "v7-insight-grid"
+  }, /*#__PURE__*/React.createElement("article", {
+    className: "v7-insight-card v7-insight-primary"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "v7-card-index"
+  }, "01"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "\u5171\u540C\u66B4\u9732"), /*#__PURE__*/React.createElement("p", null, "\u4E0D\u540C\u7B56\u7565\u540C\u65F6\u6301\u6709\u7684\u4E3B\u9898\u65B9\u5411\u3002")), /*#__PURE__*/React.createElement("ul", {
+    className: "v7-theme-list"
+  }, shared.length ? shared.map(([theme, owners]) => /*#__PURE__*/React.createElement("li", {
+    key: theme
+  }, /*#__PURE__*/React.createElement("strong", null, theme), /*#__PURE__*/React.createElement("span", null, owners.length, " \u5957\u7B56\u7565"), /*#__PURE__*/React.createElement("small", null, owners.map(owner => owner.name).join(" · ")))) : /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "\u6682\u65E0\u5171\u540C\u4E3B\u9898"), /*#__PURE__*/React.createElement("small", null, "\u5404\u7B56\u7565\u5F53\u524D\u6301\u4ED3\u8F83\u5206\u6563")))), /*#__PURE__*/React.createElement("article", {
+    className: "v7-insight-card"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "v7-card-index"
+  }, "02"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "\u5468\u5EA6\u7B56\u7565\u52A8\u5411"), /*#__PURE__*/React.createElement("p", null, insights.defensive, "/", insights.weekly.length, " \u5957\u5468\u5EA6\u7B56\u7565\u663E\u793A\u201C\u9632\u5B88\u201D\uFF0C\u4E14\u98CE\u9669\u6807\u7B7E\u4E3A\u201C\u98CE\u9669\u4E0A\u5347\u201D\u3002")), /*#__PURE__*/React.createElement("dl", {
+    className: "v7-direction-list"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\u672C\u671F\u8C03\u5165"), /*#__PURE__*/React.createElement("dd", null, addText)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\u672C\u671F\u8C03\u51FA"), /*#__PURE__*/React.createElement("dd", null, removeText)))), /*#__PURE__*/React.createElement("article", {
+    className: "v7-insight-card"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "v7-card-index"
+  }, "03"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "\u53E3\u5F84\u5206\u6B67"), /*#__PURE__*/React.createElement("p", null, "\u5468\u5EA6\u7B56\u7565\u4E3A\u7F51\u7AD9\u81EA\u7B97\u56DE\u6D4B\uFF0C\u6708\u5EA6\u7EC4\u5408\u4E3A\u673A\u6784\u5B98\u65B9\u5C55\u793A\uFF0C\u66F4\u65B0\u9891\u7387\u4E0E\u6210\u4EA4\u89C4\u5219\u4E0D\u540C\u3002")), /*#__PURE__*/React.createElement("div", {
+    className: "v7-date-pair"
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("small", null, "\u5468\u5EA6\u914D\u7F6E"), /*#__PURE__*/React.createElement("strong", null, insights.latestWeeklyDate)), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("small", null, "\u6708\u5EA6\u914D\u7F6E"), /*#__PURE__*/React.createElement("strong", null, insights.latestMonthlyDate))))));
+}
+function QuickFinder({
+  data,
+  onScreen
+}) {
+  const [query, setQuery] = useState("");
+  const overview = data?.meta?.overview || {};
+  const popular = ["半导体", "银行", "创新药", "电力", "有色金属"];
+  const submit = event => {
+    event.preventDefault();
+    const value = query.trim();
+    onScreen(value ? {
+      query: value
+    } : {});
+  };
+  return /*#__PURE__*/React.createElement("section", {
+    className: "v5-portal-section v7-finder",
+    "aria-labelledby": "portal-finder-title"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "v7-finder-copy"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "v2-eyebrow"
+  }, "QUICK ETF FINDER"), /*#__PURE__*/React.createElement("h2", {
+    id: "portal-finder-title"
+  }, "\u5FEB\u901F\u67E5\u627E ETF"), /*#__PURE__*/React.createElement("p", null, "\u8F93\u5165\u6307\u6570\u3001ETF \u540D\u79F0\u6216\u4EA7\u54C1\u4EE3\u7801\uFF0C\u76F4\u63A5\u5E26\u5165\u7B5B\u9009\u5668\uFF1B\u4E5F\u53EF\u4ECE\u5E38\u7528\u4E3B\u9898\u5F00\u59CB\u3002"), /*#__PURE__*/React.createElement("div", {
+    className: "v7-finder-stats"
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, overview.uniqueIndices || 0), "\u4E2A\u6307\u6570"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, overview.screenedRows || 0), "\u53EA\u5165\u9009\u4EA7\u54C1"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, data?.indList?.length || 0), "\u4E2A\u884C\u4E1A"))), /*#__PURE__*/React.createElement("div", {
+    className: "v7-finder-action"
+  }, /*#__PURE__*/React.createElement("form", {
+    onSubmit: submit
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "portal-etf-query"
+  }, "\u6307\u6570 / ETF / \u4EE3\u7801"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+    id: "portal-etf-query",
+    value: query,
+    onChange: event => setQuery(event.target.value),
+    placeholder: "\u4F8B\u5982\uFF1A\u79D1\u521B\u82AF\u7247\u3001588200",
+    autoComplete: "off"
+  }), /*#__PURE__*/React.createElement("button", {
+    type: "submit"
+  }, "\u5F00\u59CB\u67E5\u627E ", /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true"
+  }, "\u2192")))), /*#__PURE__*/React.createElement("div", {
+    className: "v7-hot-themes"
+  }, /*#__PURE__*/React.createElement("span", null, "\u5E38\u7528\u4E3B\u9898"), popular.map(item => /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    key: item,
+    onClick: () => onScreen({
+      query: item
+    })
+  }, item)))));
+}
+function MethodSection({
+  data
+}) {
+  const monthlySource = Object.values(data.strategies || {}).find(strategy => strategy.kind === "brokerage")?.sourceUrl;
+  return /*#__PURE__*/React.createElement("section", {
+    className: "v5-portal-section v7-method",
+    "aria-labelledby": "portal-method-title"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "v5-section-heading"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "v2-eyebrow"
+  }, "DATA & METHODOLOGY"), /*#__PURE__*/React.createElement("h2", {
+    id: "portal-method-title"
+  }, "\u6570\u636E\u6765\u6E90\u4E0E\u65B9\u6CD5")), /*#__PURE__*/React.createElement("p", null, "\u6240\u6709\u65E5\u671F\u6309\u7B56\u7565\u5206\u522B\u6807\u6CE8\uFF1B\u7F3A\u5931\u6570\u636E\u4E0D\u8865\u96F6\uFF0C\u5B98\u65B9\u5C55\u793A\u4E0E\u81EA\u7B97\u56DE\u6D4B\u4E0D\u6DF7\u7528\u3002")), /*#__PURE__*/React.createElement("div", {
+    className: "v7-method-grid"
+  }, /*#__PURE__*/React.createElement("article", null, /*#__PURE__*/React.createElement("span", null, "\u5468\u5EA6\u7B56\u7565"), /*#__PURE__*/React.createElement("h3", null, "\u7F51\u7AD9\u81EA\u7B97\u56DE\u6D4B"), /*#__PURE__*/React.createElement("p", null, "\u4F7F\u7528\u771F\u5B9E ETF \u884C\u60C5\u8FD8\u539F\u7B56\u7565\u8DEF\u5F84\uFF1B\u8C03\u4ED3\u65E5\u3001\u6301\u4ED3\u548C\u9A8C\u8BC1\u8BB0\u5F55\u89C1\u7B56\u7565\u8BE6\u60C5\u3002"), /*#__PURE__*/React.createElement("small", null, "\u56DE\u6D4B\u6570\u636E\u81F3 ", data.meta?.end || "—")), /*#__PURE__*/React.createElement("article", null, /*#__PURE__*/React.createElement("span", null, "\u6708\u5EA6\u7EC4\u5408"), /*#__PURE__*/React.createElement("h3", null, "\u673A\u6784\u5B98\u65B9\u5C55\u793A"), /*#__PURE__*/React.createElement("p", null, "\u56FD\u4FE1\u3001\u534E\u798F\u7684\u914D\u7F6E\u6743\u91CD\u4E0E\u4E1A\u7EE9\u6CBF\u7528\u5B98\u65B9\u5C55\u793A\uFF1B\u8D39\u7528\u4E0E\u6210\u4EA4\u89C4\u5219\u672A\u62AB\u9732\u3002"), monthlySource ? /*#__PURE__*/React.createElement("a", {
+    href: monthlySource,
+    target: "_blank",
+    rel: "noreferrer"
+  }, "\u67E5\u770B\u5B98\u65B9\u6765\u6E90 \u2197") : /*#__PURE__*/React.createElement("small", null, "\u5B98\u65B9\u6765\u6E90\u5F85\u8865\u5145")), /*#__PURE__*/React.createElement("article", null, /*#__PURE__*/React.createElement("span", null, "ETF \u4EA7\u54C1"), /*#__PURE__*/React.createElement("h3", null, "\u540C\u6307\u6570\u7B5B\u9009"), /*#__PURE__*/React.createElement("p", null, "\u4EA7\u54C1\u89C4\u6A21\u3001\u7EFC\u5408\u8D39\u7387\u300120 \u65E5\u6210\u4EA4\u989D\u3001\u5468\u6DA8\u8DCC\u4E0E\u6EA2\u4EF7\u7387\u5747\u4FDD\u7559\u539F\u59CB\u5FEB\u7167\u53E3\u5F84\u3002"), /*#__PURE__*/React.createElement("small", null, "\u7B5B\u9009\u5FEB\u7167 ", window.__etfFilterData?.meta?.asOf || "—"))), /*#__PURE__*/React.createElement("p", {
+    className: "v7-method-note"
+  }, "\u4EC5\u4F9B\u7814\u7A76\u53C2\u8003\uFF0C\u4E0D\u6784\u6210\u4EA7\u54C1\u63A8\u8350\u6216\u6536\u76CA\u627F\u8BFA\u3002\u8DE8\u53E3\u5F84\u66F2\u7EBF\u4EC5\u7528\u4E8E\u8D70\u52BF\u89C2\u5BDF\uFF0C\u4E0D\u7528\u4E8E\u6536\u76CA\u6392\u540D\u3002"));
 }
 function PortalPage({
   data,
+  filterData,
   onResearch,
   onOpenResearch,
   onScreen
@@ -4502,7 +4893,7 @@ function PortalPage({
   return /*#__PURE__*/React.createElement("main", {
     id: "main-content",
     className: "v2-main v2-portal",
-    "data-screen-label": "\u5168\u7AD9\u6574\u5408\u7248 V6 \xB7 \u603B\u89C8"
+    "data-screen-label": "\u51B3\u7B56\u9996\u9875\u7248 V7 \xB7 \u603B\u89C8"
   }, /*#__PURE__*/React.createElement(PortalHero, {
     data: data,
     onResearch: onResearch,
@@ -4516,7 +4907,14 @@ function PortalPage({
     strategies: data.strategies,
     allStrategies: true,
     embedded: true
-  })), /*#__PURE__*/React.createElement(Footer, {
+  })), /*#__PURE__*/React.createElement(ConsensusSection, {
+    strategies: data.strategies
+  }), /*#__PURE__*/React.createElement(QuickFinder, {
+    data: filterData,
+    onScreen: onScreen
+  }), /*#__PURE__*/React.createElement(MethodSection, {
+    data: data
+  }), /*#__PURE__*/React.createElement(Footer, {
     meta: data.meta
   }));
 }
@@ -4908,14 +5306,7 @@ function Footer({
   }, /*#__PURE__*/React.createElement("span", null, "ETF \u7814\u7A76\u5DE5\u5177\u7BB1 \xB7 \u5468\u5EA6\u4E0E\u6708\u5EA6\u7B56\u7565"), /*#__PURE__*/React.createElement("span", null, "\u5404\u7B56\u7565\u622A\u6B62\u65E5\u89C1\u5361\u7247\u4E0E\u8BE6\u60C5 \xB7 \u4EC5\u4F9B\u7814\u7A76\u53C2\u8003"));
 }
 function App() {
-  const [view, setView] = useState(() => {
-    try {
-      const stored = localStorage.getItem("etf-overview-v6-view");
-      return ["portal", "research", "screen"].includes(stored) ? stored : "portal";
-    } catch {
-      return "portal";
-    }
-  });
+  const [view, setView] = useState("portal");
   const fixture = useMemo(() => new URLSearchParams(window.location.search).get("fixture") || "current", []);
   const rawOverview = window.__data || {};
   const rawBacktest = window.__backtestData || {};
@@ -4924,19 +5315,19 @@ function App() {
   const keys = Object.keys(data.strategies || {});
   const [activeKey, setActiveKey] = useState(() => {
     try {
-      const stored = localStorage.getItem("etf-overview-v6-strategy");
+      const stored = localStorage.getItem("etf-overview-v7-strategy");
       return keys.includes(stored) ? stored : keys[0] || "";
     } catch {
       return keys[0] || "";
     }
   });
   const [pendingAnchor, setPendingAnchor] = useState("");
+  const [screenSeed, setScreenSeed] = useState({});
   useEffect(() => {
     try {
-      localStorage.setItem("etf-overview-v6-view", view);
-      localStorage.setItem("etf-overview-v6-strategy", activeKey);
+      localStorage.setItem("etf-overview-v7-strategy", activeKey);
     } catch {}
-  }, [view, activeKey]);
+  }, [activeKey]);
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
       if (pendingAnchor) {
@@ -4966,8 +5357,12 @@ function App() {
     setActiveKey(key);
     enterResearch("research-action");
   };
+  const openScreen = (seed = {}) => {
+    setScreenSeed(seed);
+    navigate("screen");
+  };
   return /*#__PURE__*/React.createElement("div", {
-    className: "v2-app v3-app v4-app v5-app v6-app"
+    className: "v2-app v3-app v4-app v5-app v6-app v7-app"
   }, /*#__PURE__*/React.createElement("a", {
     className: "skip-link",
     href: "#main-content"
@@ -4977,9 +5372,10 @@ function App() {
     meta: data.meta
   }), view === "portal" && /*#__PURE__*/React.createElement(PortalPage, {
     data: data,
+    filterData: rawFilterData,
     onResearch: enterResearch,
     onOpenResearch: openResearchFor,
-    onScreen: () => navigate("screen")
+    onScreen: openScreen
   }), view === "research" && /*#__PURE__*/React.createElement(ResearchPage, {
     data: data,
     rawOverview: rawOverview,
@@ -4987,8 +5383,11 @@ function App() {
     activeKey: activeKey,
     onStrategy: setActiveKey
   }), view === "screen" && /*#__PURE__*/React.createElement(ETFFilterPage, {
+    key: `${screenSeed.query || ""}-${screenSeed.industry || ""}`,
     data: rawFilterData,
-    source: window.__etfFilterSource
+    source: window.__etfFilterSource,
+    initialQuery: screenSeed.query || "",
+    initialIndustry: screenSeed.industry || ""
   }));
 }
 ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/React.createElement(App, null));
