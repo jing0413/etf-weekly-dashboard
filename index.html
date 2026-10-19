@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light" />
-  <meta name="description" content="跟踪 ETF 策略信号，验证历史表现，并查找对应产品" />
-  <title>ETF 研究工具箱｜策略跟踪与产品筛选</title>
+  <meta name="description" content="从 ETF 策略持仓进入跟踪指数，并比较同指数产品" />
+  <title>ETF 研究工具箱｜策略与产品联动</title>
   <link rel="icon" href="data:," />
   <style>
 /* styles.css */
@@ -1792,6 +1792,141 @@ body {
   .v7-hot-themes > span { width: 100%; }
 }
 
+/* styles-v8.css */
+.v8-product-path {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: -2px 0 9px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: .06em;
+}
+.v8-product-path i { color: var(--blue); font-style: normal; }
+.v8-app .v6-holdings-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  min-height: 42px;
+  padding: 6px 7px 6px 9px;
+}
+.v8-holding-copy { min-width: 0; }
+.v8-holding-copy strong,
+.v8-holding-copy code { display: block; }
+.v8-holding-copy code { margin-top: 3px; }
+.v8-product-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 28px;
+  padding: 0 7px;
+  color: var(--blue);
+  border: 1px solid #bdcae8;
+  border-radius: 3px;
+  background: #f2f5fc;
+  cursor: pointer;
+  font-size: 8px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.v8-product-link:hover { color: white; border-color: var(--blue); background: var(--blue); }
+
+.v8-context-bridge {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 28px;
+  margin: -8px 0 18px;
+  padding: 18px 20px;
+  color: white;
+  background: var(--blue-dark);
+  border-top: 4px solid #80a6ff;
+}
+.v8-context-kicker {
+  color: #9dbaff;
+  font-family: var(--mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+.v8-context-bridge p { margin: 7px 0 3px; color: rgba(255,255,255,.68); font-size: 10px; }
+.v8-context-bridge p strong { color: white; }
+.v8-context-bridge h2 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 9px; margin: 0; font-family: var(--serif); font-size: 22px; }
+.v8-context-bridge h2 code { color: #b9cbf7; font-family: var(--mono); font-size: 10px; }
+.v8-context-bridge small { display: block; margin-top: 7px; color: rgba(255,255,255,.6); font-size: 9px; }
+.v8-index-target {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin-top: 11px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.18);
+}
+.v8-index-target span { color: #9dbaff; font-size: 9px; }
+.v8-index-target strong { font-size: 12px; }
+.v8-index-target code { color: rgba(255,255,255,.68); font-family: var(--mono); font-size: 9px; }
+.v8-index-target em { padding: 4px 7px; color: #183a78; background: #dce7ff; font-size: 8px; font-style: normal; font-weight: 700; }
+.v8-context-bridge > button {
+  min-height: 40px;
+  padding: 0 14px;
+  color: white;
+  border: 1px solid rgba(255,255,255,.38);
+  background: transparent;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+}
+.v8-context-bridge > button:hover { color: var(--blue-dark); background: white; }
+
+.v8-product-linked { border-color: #9db5e8; box-shadow: inset 0 3px 0 var(--blue); }
+.v8-product-current { border-color: var(--orange); box-shadow: inset 0 3px 0 var(--orange); }
+.v4-product-name span.v8-current-badge {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 7px;
+  padding: 4px 6px;
+  color: #824a08;
+  border: 1px solid #efcca9;
+  background: var(--orange-soft);
+  font-family: inherit;
+  font-size: 8px;
+  font-weight: 700;
+}
+.v8-strategy-owners { display: grid; gap: 7px; margin: 11px -13px -13px; padding: 10px 13px 12px; background: #f2f5fc; border-top: 1px solid #cfdaef; }
+.v8-strategy-owners > span { color: var(--blue); font-family: var(--mono); font-size: 8px; font-weight: 700; letter-spacing: .08em; }
+.v8-strategy-owners > div { display: grid; gap: 5px; }
+.v8-strategy-owners button {
+  display: grid;
+  grid-template-columns: 7px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4px 7px;
+  width: 100%;
+  min-height: 36px;
+  padding: 6px 8px;
+  color: var(--ink-2);
+  border: 1px solid #d6deef;
+  background: white;
+  cursor: pointer;
+  text-align: left;
+}
+.v8-strategy-owners button:hover { border-color: var(--blue); }
+.v8-strategy-owners button i { grid-row: 1 / 3; width: 7px; height: 7px; border-radius: 50%; }
+.v8-strategy-owners button b { overflow: hidden; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.v8-strategy-owners button small { grid-column: 2; color: var(--muted); font-size: 8px; }
+.v8-strategy-owners button em { grid-column: 3; grid-row: 1 / 3; color: var(--blue); font-size: 8px; font-style: normal; font-weight: 700; white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .v8-context-bridge { grid-template-columns: 1fr; gap: 15px; }
+  .v8-context-bridge > button { width: 100%; }
+}
+
+@media (max-width: 420px) {
+  .v8-app .v6-holdings-list li { grid-template-columns: 1fr; }
+  .v8-product-link { justify-content: center; width: 100%; }
+}
+
   </style>
 </head>
 <body>
@@ -3563,7 +3698,7 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
     PeriodReturnChart
   };
 })();
-/* etf-filter-v7.js */
+/* etf-filter-v8.js */
 (function () {
   const {
     useEffect,
@@ -3629,13 +3764,20 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
     }, /*#__PURE__*/React.createElement("span", null, label), /*#__PURE__*/React.createElement("strong", null, value), /*#__PURE__*/React.createElement("small", null, note));
   }
   function ProductCard({
-    item
+    item,
+    strategyUsage,
+    onOpenResearch,
+    currentCode
   }) {
+    const owners = strategyUsage?.[item.code] || [];
+    const isCurrent = item.code === currentCode;
     return /*#__PURE__*/React.createElement("article", {
-      className: "v4-product-card"
+      className: `v4-product-card${owners.length ? " v8-product-linked" : ""}${isCurrent ? " v8-product-current" : ""}`
     }, /*#__PURE__*/React.createElement("div", {
       className: "v4-product-name"
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, item.name), /*#__PURE__*/React.createElement("span", null, item.code, " \xB7 ", item.exch)), /*#__PURE__*/React.createElement("em", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, item.name), /*#__PURE__*/React.createElement("span", null, item.code, " \xB7 ", item.exch), isCurrent && /*#__PURE__*/React.createElement("span", {
+      className: "v8-current-badge"
+    }, "\u7B56\u7565\u5F53\u524D\u6301\u6709")), /*#__PURE__*/React.createElement("em", {
       className: `role-${item.role}`
     }, ROLE_LABELS[item.role] || item.role)), /*#__PURE__*/React.createElement("dl", null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\u89C4\u6A21"), /*#__PURE__*/React.createElement("dd", null, fmtScale(item.scale))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\u7EFC\u5408\u8D39\u7387"), /*#__PURE__*/React.createElement("dd", null, fmtFee(item.fee))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\u5468\u6DA8\u8DCC"), /*#__PURE__*/React.createElement("dd", {
       className: rateClass(item.weekChg)
@@ -3643,7 +3785,18 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
       className: rateClass(item.premium)
     }, fmtRate(item.premium)))), /*#__PURE__*/React.createElement("div", {
       className: "v4-product-foot"
-    }, /*#__PURE__*/React.createElement("span", null, item.strategy || "产品类型待核实"), /*#__PURE__*/React.createElement("span", null, item.amt20 == null ? "20 日成交额缺失" : `20 日均成交 ${item.amt20} 亿`)));
+    }, /*#__PURE__*/React.createElement("span", null, item.strategy || "产品类型待核实"), /*#__PURE__*/React.createElement("span", null, item.amt20 == null ? "20 日成交额缺失" : `20 日均成交 ${item.amt20} 亿`)), owners.length > 0 && /*#__PURE__*/React.createElement("div", {
+      className: "v8-strategy-owners",
+      "aria-label": "\u6301\u6709\u8BE5\u4EA7\u54C1\u7684\u7B56\u7565"
+    }, /*#__PURE__*/React.createElement("span", null, "\u7B56\u7565\u6301\u6709"), /*#__PURE__*/React.createElement("div", null, owners.map(owner => /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      key: owner.key,
+      onClick: () => onOpenResearch?.(owner.key)
+    }, /*#__PURE__*/React.createElement("i", {
+      style: {
+        background: owner.color
+      }
+    }), /*#__PURE__*/React.createElement("b", null, owner.name), /*#__PURE__*/React.createElement("small", null, owner.frequency, " \xB7 ", owner.effectiveDate || "日期待补", owner.isNew ? " · 本期调入" : ""), /*#__PURE__*/React.createElement("em", null, "\u67E5\u770B\u7B56\u7565 \u2192"))))));
   }
   function IndexBlock({
     group,
@@ -3651,7 +3804,10 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
     expanded,
     onToggle,
     selected,
-    onCompare
+    onCompare,
+    strategyUsage,
+    onOpenResearch,
+    currentCode
   }) {
     const agg = data.indexAgg?.[group.index] || {};
     const code = data.indexCodes?.[group.index] || "";
@@ -3679,6 +3835,9 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
       className: "v4-products"
     }, group.products.map(item => /*#__PURE__*/React.createElement(ProductCard, {
       item: item,
+      strategyUsage: strategyUsage,
+      onOpenResearch: onOpenResearch,
+      currentCode: currentCode,
       key: `${item.code}-${item.role}`
     }))));
   }
@@ -3691,7 +3850,10 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
     expandedIndices,
     setExpandedIndices,
     compare,
-    onCompare
+    onCompare,
+    strategyUsage,
+    onOpenResearch,
+    currentCode
   }) {
     const toggle = (setter, current, key) => setter(() => {
       const next = new Set(current);
@@ -3735,7 +3897,10 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
           expanded: expanded,
           selected: compare.includes(group.index),
           onToggle: () => toggle(setExpandedIndices, expandedIndices, group.index),
-          onCompare: () => onCompare(group.index)
+          onCompare: () => onCompare(group.index),
+          strategyUsage: strategyUsage,
+          onOpenResearch: onOpenResearch,
+          currentCode: currentCode
         });
       }))))));
     }));
@@ -3967,7 +4132,10 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
   function ScreenBrowser({
     data,
     initialQuery = "",
-    initialIndustry = ""
+    initialIndustry = "",
+    strategyUsage = {},
+    onOpenResearch,
+    currentCode = ""
   }) {
     const [industry, setIndustry] = useState(initialIndustry);
     const [subIndustry, setSubIndustry] = useState("");
@@ -4089,7 +4257,10 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
       expandedIndices: expandedIndices,
       setExpandedIndices: setExpandedIndices,
       compare: compare,
-      onCompare: toggleCompare
+      onCompare: toggleCompare,
+      strategyUsage: strategyUsage,
+      onOpenResearch: onOpenResearch,
+      currentCode: currentCode
     }), /*#__PURE__*/React.createElement(CompareDock, {
       indices: compare,
       data: data,
@@ -4114,9 +4285,13 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
     data,
     source,
     initialQuery = "",
-    initialIndustry = ""
+    initialIndustry = "",
+    context = null,
+    strategyUsage = {},
+    onOpenResearch
   }) {
     const [mode, setMode] = useState(() => {
+      if (initialQuery || context) return "screen";
       try {
         return localStorage.getItem("etf-overview-v4-screen-mode") === "stock" ? "stock" : "screen";
       } catch {
@@ -4139,7 +4314,19 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
       className: "v2-kicker"
     }, "ETF PRODUCT RESEARCH"), /*#__PURE__*/React.createElement("h1", null, "ETF \u4EA7\u54C1\u7B5B\u9009"), /*#__PURE__*/React.createElement("p", null, "\u4ECE\u884C\u4E1A\u548C\u6307\u6570\u51FA\u53D1\u9009\u4EA7\u54C1\uFF0C\u6216\u4ECE\u4E00\u53EA\u80A1\u7968\u53CD\u5411\u67E5\u627E\u76F8\u5173 ETF\u3002\u7B5B\u9009\u7ED3\u679C\u4FDD\u7559\u539F\u59CB\u6570\u636E\u53E3\u5F84\uFF0C\u4F46\u7528\u6E10\u8FDB\u5C55\u5F00\u964D\u4F4E\u9875\u9762\u566A\u97F3\u3002")), /*#__PURE__*/React.createElement("div", {
       className: "v4-screen-asof"
-    }, /*#__PURE__*/React.createElement("span", null, "\u6570\u636E\u622A\u81F3"), /*#__PURE__*/React.createElement("strong", null, data.meta?.asOf || "—"), /*#__PURE__*/React.createElement("small", null, "\u6570\u636E\u6E90\uFF1A", source || "本地 ETF 筛选快照"))), /*#__PURE__*/React.createElement("section", {
+    }, /*#__PURE__*/React.createElement("span", null, "\u6570\u636E\u622A\u81F3"), /*#__PURE__*/React.createElement("strong", null, data.meta?.asOf || "—"), /*#__PURE__*/React.createElement("small", null, "\u6570\u636E\u6E90\uFF1A", source || "本地 ETF 筛选快照"))), context && /*#__PURE__*/React.createElement("section", {
+      className: "v8-context-bridge",
+      "aria-label": "\u7B56\u7565\u4E0E\u4EA7\u54C1\u8054\u52A8\u4E0A\u4E0B\u6587"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+      className: "v8-context-kicker"
+    }, "STRATEGY \u2192 INDEX \u2192 PEER ETF"), /*#__PURE__*/React.createElement("p", null, "\u6765\u81EA ", /*#__PURE__*/React.createElement("strong", null, context.strategyName), " \u7684\u5F53\u524D\u6301\u4ED3"), /*#__PURE__*/React.createElement("h2", null, context.holdingName, " ", /*#__PURE__*/React.createElement("code", null, context.holdingCode)), context.trackingIndex ? /*#__PURE__*/React.createElement("div", {
+      className: "v8-index-target"
+    }, /*#__PURE__*/React.createElement("span", null, "\u8DDF\u8E2A\u6307\u6570"), /*#__PURE__*/React.createElement("strong", null, context.trackingIndex), context.indexCode && /*#__PURE__*/React.createElement("code", null, context.indexCode), /*#__PURE__*/React.createElement("em", null, context.peerCount || 0, " \u53EA\u540C\u7C7B ETF")) : /*#__PURE__*/React.createElement("small", null, "\u6682\u672A\u5339\u914D\u5230\u8DDF\u8E2A\u6307\u6570\uFF0C\u5F53\u524D\u6309\u4EA7\u54C1\u4EE3\u7801\u68C0\u7D22\u3002")), /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      onClick: () => onOpenResearch?.(context.strategyKey)
+    }, "\u8FD4\u56DE\u7B56\u7565\u8BE6\u60C5 ", /*#__PURE__*/React.createElement("span", {
+      "aria-hidden": "true"
+    }, "\u2192"))), /*#__PURE__*/React.createElement("section", {
       className: "v4-screen-stats",
       "aria-label": "ETF \u7B5B\u9009\u6570\u636E\u6982\u89C8"
     }, /*#__PURE__*/React.createElement(Stat, {
@@ -4171,7 +4358,10 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
     }, /*#__PURE__*/React.createElement("span", null, "02"), "\u6309\u80A1\u7968\u67E5\u627E")), mode === "screen" ? /*#__PURE__*/React.createElement(ScreenBrowser, {
       data: data,
       initialQuery: initialQuery,
-      initialIndustry: initialIndustry
+      initialIndustry: initialIndustry,
+      strategyUsage: strategyUsage,
+      onOpenResearch: onOpenResearch,
+      currentCode: context?.holdingCode || ""
     }) : /*#__PURE__*/React.createElement(StockFinder, {
       data: data
     }), /*#__PURE__*/React.createElement("details", {
@@ -4180,7 +4370,7 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
       className: "v2-footer"
     }, /*#__PURE__*/React.createElement("span", null, "ETF \u7814\u7A76\u5DE5\u5177\u7BB1 \xB7 \u5168\u7AD9\u6574\u5408\u7248"), /*#__PURE__*/React.createElement("span", null, "\u4EA7\u54C1\u7B5B\u9009\u5FEB\u7167 ", data.meta?.asOf || "—", " \xB7 \u4EC5\u4F9B\u7814\u7A76\u53C2\u8003")));
   }
-  window.ETFFilterV7 = {
+  window.ETFFilterV8 = {
     ETFFilterPage
   };
 })();
@@ -4399,7 +4589,7 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
     PortalHoldings
   };
 })();
-/* portfolio-board-v6.js */
+/* portfolio-board-v8.js */
 (() => {
   function TradeList({
     items,
@@ -4418,7 +4608,8 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
     strategy,
     strategyKey,
     number,
-    onOpenResearch
+    onOpenResearch,
+    onOpenProduct
   }) {
     const [expanded, setExpanded] = React.useState(false);
     const latest = strategy.latestAdj || {};
@@ -4470,11 +4661,35 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
       "aria-label": `${strategy.name || "策略"}当前持仓`
     }, /*#__PURE__*/React.createElement("div", {
       className: "v6-current-head"
-    }, /*#__PURE__*/React.createElement("h4", null, "\u5F53\u524D\u6301\u4ED3"), /*#__PURE__*/React.createElement("span", null, holdings.length, " \u53EA ETF")), holdings.length ? /*#__PURE__*/React.createElement("ol", {
+    }, /*#__PURE__*/React.createElement("h4", null, "\u5F53\u524D\u6301\u4ED3"), /*#__PURE__*/React.createElement("span", null, holdings.length, " \u53EA ETF")), /*#__PURE__*/React.createElement("p", {
+      className: "v8-product-path"
+    }, /*#__PURE__*/React.createElement("span", null, "\u7B56\u7565\u6301\u4ED3"), /*#__PURE__*/React.createElement("i", {
+      "aria-hidden": "true"
+    }, "\u2192"), /*#__PURE__*/React.createElement("span", null, "\u8DDF\u8E2A\u6307\u6570"), /*#__PURE__*/React.createElement("i", {
+      "aria-hidden": "true"
+    }, "\u2192"), /*#__PURE__*/React.createElement("span", null, "\u540C\u7C7B ETF")), holdings.length ? /*#__PURE__*/React.createElement("ol", {
       className: "v6-holdings-list"
     }, (expanded ? holdings : holdings.slice(0, 3)).map((holding, index) => /*#__PURE__*/React.createElement("li", {
       key: `${holding.code || holding.name}-${index}`
-    }, /*#__PURE__*/React.createElement("strong", null, holding.name || "未命名 ETF"), /*#__PURE__*/React.createElement("code", null, holding.code || "—", typeof holding.weight === "number" ? ` · ${(holding.weight * 100).toFixed(0)}%` : ""), newCodes.has(holding.code) && /*#__PURE__*/React.createElement("span", {
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "v8-holding-copy"
+    }, /*#__PURE__*/React.createElement("strong", null, holding.name || "未命名 ETF"), /*#__PURE__*/React.createElement("code", null, holding.code || "—", typeof holding.weight === "number" ? ` · ${(holding.weight * 100).toFixed(0)}%` : "")), /*#__PURE__*/React.createElement("button", {
+      className: "v8-product-link",
+      type: "button",
+      onClick: () => onOpenProduct({
+        query: holding.code || holding.name || "",
+        origin: {
+          strategyKey,
+          strategyName: strategy.name || "未命名策略",
+          holdingName: holding.name || "未命名 ETF",
+          holdingCode: holding.code || "",
+          effectiveDate: latest.date || ""
+        }
+      }),
+      "aria-label": `查找 ${holding.name || holding.code || "该产品"} 的同类 ETF`
+    }, "\u627E\u540C\u7C7B ETF ", /*#__PURE__*/React.createElement("span", {
+      "aria-hidden": "true"
+    }, "\u2192")), newCodes.has(holding.code) && /*#__PURE__*/React.createElement("span", {
       className: "v6-new-dot",
       "aria-label": "\u672C\u671F\u8C03\u5165",
       title: "\u672C\u671F\u8C03\u5165"
@@ -4497,7 +4712,8 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
   }
   function PortalPortfolioBoard({
     strategies,
-    onOpenResearch
+    onOpenResearch,
+    onOpenProduct
   }) {
     const entries = Object.entries(strategies || {});
     return /*#__PURE__*/React.createElement("section", {
@@ -4510,23 +4726,24 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
       className: "v2-eyebrow"
     }, "WEEKLY ALLOCATION"), /*#__PURE__*/React.createElement("h2", {
       id: "portal-holdings-title"
-    }, "\u6700\u65B0\u8C03\u4ED3\u4E0E\u5F53\u524D\u6301\u4ED3")), /*#__PURE__*/React.createElement("p", null, "\u5404\u7B56\u7565\u6309\u81EA\u5DF1\u7684\u914D\u7F6E\u9891\u7387\u66F4\u65B0\uFF0C\u5C55\u5F00\u53EF\u67E5\u770B\u5168\u90E8 ETF\uFF1B\u6301\u4ED3\u7EA2\u70B9\u8868\u793A\u672C\u671F\u8C03\u5165\u3002")), entries.length ? /*#__PURE__*/React.createElement("div", {
+    }, "\u6700\u65B0\u8C03\u4ED3\u4E0E\u5F53\u524D\u6301\u4ED3")), /*#__PURE__*/React.createElement("p", null, "\u4ECE\u7B56\u7565\u6301\u4ED3\u8FDB\u5165\u5176\u8DDF\u8E2A\u6307\u6570\uFF0C\u6BD4\u8F83\u540C\u6307\u6570 ETF\uFF1B\u5C55\u5F00\u53EF\u67E5\u770B\u5168\u90E8\u6301\u4ED3\uFF0C\u7EA2\u70B9\u8868\u793A\u672C\u671F\u8C03\u5165\u3002")), entries.length ? /*#__PURE__*/React.createElement("div", {
       className: "v5-holdings-grid v6-portfolio-grid"
     }, entries.map(([key, strategy], index) => /*#__PURE__*/React.createElement(PortfolioCard, {
       key: key,
       strategy: strategy,
       strategyKey: key,
       number: index + 1,
-      onOpenResearch: onOpenResearch
+      onOpenResearch: onOpenResearch,
+      onOpenProduct: onOpenProduct
     }))) : /*#__PURE__*/React.createElement("div", {
       className: "empty-state"
     }, "\u6682\u65E0\u7B56\u7565\u6570\u636E"));
   }
-  window.ETFPortalV6 = {
+  window.ETFPortalV8 = {
     PortalPortfolioBoard
   };
 })();
-/* app-v7.js */
+/* app-v8.js */
 const {
   useEffect,
   useMemo,
@@ -4546,13 +4763,13 @@ const {
 } = window.ETFChartsV3;
 const {
   ETFFilterPage
-} = window.ETFFilterV7;
+} = window.ETFFilterV8;
 const {
   PortalComparisonChart
 } = window.ETFPortalV5;
 const {
   PortalPortfolioBoard
-} = window.ETFPortalV6;
+} = window.ETFPortalV8;
 function clone(value) {
   return JSON.parse(JSON.stringify(value || {}));
 }
@@ -4729,6 +4946,26 @@ function portalInsights(strategiesMap) {
     latestMonthlyDate: monthlyDates.at(-1) || "—"
   };
 }
+function buildStrategyUsage(strategiesMap) {
+  const usage = {};
+  Object.entries(strategiesMap || {}).forEach(([key, strategy]) => {
+    const addedCodes = new Set((strategy.latestAdj?.added || []).map(item => item.code).filter(Boolean));
+    (strategy.holdingsNow || []).forEach(holding => {
+      if (!holding.code) return;
+      if (!usage[holding.code]) usage[holding.code] = [];
+      usage[holding.code].push({
+        key,
+        name: strategy.name || "未命名策略",
+        color: strategy.color,
+        frequency: strategy.frequency || (strategy.kind === "brokerage" ? "月度" : "周度"),
+        effectiveDate: strategy.latestAdj?.date || "",
+        weight: holding.weight,
+        isNew: addedCodes.has(holding.code)
+      });
+    });
+  });
+  return usage;
+}
 function PortalHero({
   data,
   onResearch,
@@ -4900,7 +5137,8 @@ function PortalPage({
     onScreen: onScreen
   }), /*#__PURE__*/React.createElement(PortalPortfolioBoard, {
     strategies: data.strategies,
-    onOpenResearch: onOpenResearch
+    onOpenResearch: onOpenResearch,
+    onOpenProduct: onScreen
   }), /*#__PURE__*/React.createElement(PortalComparisonChart, {
     strategies: data.strategies
   }, /*#__PURE__*/React.createElement(BrokerageSummary, {
@@ -5312,6 +5550,7 @@ function App() {
   const rawBacktest = window.__backtestData || {};
   const rawFilterData = window.__etfFilterData || {};
   const data = useMemo(() => mergeSourceData(rawOverview, rawBacktest, fixture), [fixture]);
+  const strategyUsage = useMemo(() => buildStrategyUsage(data.strategies), [data.strategies]);
   const keys = Object.keys(data.strategies || {});
   const [activeKey, setActiveKey] = useState(() => {
     try {
@@ -5358,11 +5597,24 @@ function App() {
     enterResearch("research-action");
   };
   const openScreen = (seed = {}) => {
-    setScreenSeed(seed);
+    const holdingCode = seed.origin?.holdingCode || "";
+    const matchedProduct = holdingCode ? (rawFilterData.rows || []).find(item => item.code === holdingCode) : null;
+    const trackingIndex = matchedProduct?.index || "";
+    const peerCount = trackingIndex ? (rawFilterData.rows || []).filter(item => item.index === trackingIndex).length : 0;
+    setScreenSeed(matchedProduct ? {
+      ...seed,
+      query: trackingIndex,
+      origin: {
+        ...seed.origin,
+        trackingIndex,
+        indexCode: rawFilterData.indexCodes?.[trackingIndex] || matchedProduct.indexCode || "",
+        peerCount
+      }
+    } : seed);
     navigate("screen");
   };
   return /*#__PURE__*/React.createElement("div", {
-    className: "v2-app v3-app v4-app v5-app v6-app v7-app"
+    className: "v2-app v3-app v4-app v5-app v6-app v7-app v8-app"
   }, /*#__PURE__*/React.createElement("a", {
     className: "skip-link",
     href: "#main-content"
@@ -5383,11 +5635,14 @@ function App() {
     activeKey: activeKey,
     onStrategy: setActiveKey
   }), view === "screen" && /*#__PURE__*/React.createElement(ETFFilterPage, {
-    key: `${screenSeed.query || ""}-${screenSeed.industry || ""}`,
+    key: `${screenSeed.query || ""}-${screenSeed.industry || ""}-${screenSeed.origin?.holdingCode || ""}`,
     data: rawFilterData,
     source: window.__etfFilterSource,
     initialQuery: screenSeed.query || "",
-    initialIndustry: screenSeed.industry || ""
+    initialIndustry: screenSeed.industry || "",
+    context: screenSeed.origin || null,
+    strategyUsage: strategyUsage,
+    onOpenResearch: openResearchFor
   }));
 }
 ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/React.createElement(App, null));
