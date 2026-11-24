@@ -2494,6 +2494,10 @@ body {
 .v12-overseas-direction { color:#2f3e57; font-size:15px; font-weight:800; line-height:1.45; }
 .v12-overseas-leaders { display:block; max-width:250px; margin-top:7px; color:#6d7990; font-size:13px; line-height:1.55; }
 .v12-overseas-leaders b { color:#173f7d; font-weight:800; }
+.v12-metric-highlight { background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(238,245,255,.82) 100%); }
+.v12-metric-badge { display:inline-flex; align-items:center; min-height:25px; margin-top:7px; padding:3px 8px; border:1px solid; border-radius:999px; font-size:14px; font-weight:800; line-height:1; white-space:nowrap; }
+.v12-metric-badge--return { color:#a6412f; border-color:#e5a393; background:#fff2ee; }
+.v12-metric-badge--drawdown { color:#0e7552; border-color:#8bc8ae; background:#ecfaf3; }
 .v12-number { font-family:var(--mono); font-weight:700; white-space:nowrap; }
 .v12-number.positive { color:#c84b35; }
 .v12-number.negative { color:#168259; }
@@ -5651,6 +5655,8 @@ function ETF6040TableV12({data}) {
   const [activeCategory, setActiveCategory] = React.useState("all");
   const sorter = (a, b) => sortKey === "vol" ? a.vol - b.vol : b[sortKey] - a[sortKey];
   const categories = activeCategory === "all" ? data.categories : data.categories.filter(item => item.key === activeCategory);
+  const bestYtd = Math.max(...data.products.map(item => item.ytd).filter(Number.isFinite));
+  const smallestDrawdown = Math.max(...data.products.map(item => item.drawdown).filter(Number.isFinite));
   return /*#__PURE__*/React.createElement("section", {className:"v12-comparison", "aria-labelledby":"v12-comparison-title"},
     /*#__PURE__*/React.createElement("div", {className:"v12-section-head"},
       /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {className:"v2-eyebrow"}, "PRODUCT COMPARISON"), /*#__PURE__*/React.createElement("h2", {id:"v12-comparison-title"}, data.products.length, " 只 ETF 按策略分组")),
@@ -5674,15 +5680,15 @@ function ETF6040TableV12({data}) {
             /*#__PURE__*/React.createElement("tbody", null, rows.map(item => /*#__PURE__*/React.createElement("tr", {key:item.code},
               /*#__PURE__*/React.createElement("td", {className:"v12-product"}, /*#__PURE__*/React.createElement("strong", null, item.name), item.localHongKong && /*#__PURE__*/React.createElement("span", {className:"v12-product-badge"}, "港股本地股"), /*#__PURE__*/React.createElement("code", null, item.code), /*#__PURE__*/React.createElement("small", null, "成立 ", item.inception)),
               /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", {className:"v12-overseas-direction"}, item.overseas), /*#__PURE__*/React.createElement("small", {className:"v12-overseas-leaders"}, /*#__PURE__*/React.createElement("b", null, "代表："), item.leaders)),
-              /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.ytd})),
+              /*#__PURE__*/React.createElement("td", {className:item.ytd === bestYtd ? "v12-metric-highlight" : undefined}, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.ytd}), item.ytd === bestYtd && /*#__PURE__*/React.createElement("span", {className:"v12-metric-badge v12-metric-badge--return"}, "年内收益最高")),
               /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.since})),
               /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.vol, signed:false})),
-              /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.drawdown, signed:false})),
+              /*#__PURE__*/React.createElement("td", {className:item.drawdown === smallestDrawdown ? "v12-metric-highlight" : undefined}, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.drawdown, signed:false}), item.drawdown === smallestDrawdown && /*#__PURE__*/React.createElement("span", {className:"v12-metric-badge v12-metric-badge--drawdown"}, "回撤最小")),
               /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {className:"v12-number"}, item.scale.toFixed(2)), /*#__PURE__*/React.createElement("small", null, " 亿港元")),
               /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.fee, signed:false}))))))));
     }),
     /*#__PURE__*/React.createElement("div", {className:"v12-table-note"},
-      /*#__PURE__*/React.createElement("p", null, "3 月成立的产品仅约 8 个月历史，“今年以来”约等于“成立以来”。不同成立日的累计收益不宜直接作为同周期排名。代表公司根据基金管理人或指数编制方公开资料整理，实际持仓会随调仓变化。"),
+      /*#__PURE__*/React.createElement("p", null, "标记按全部 13 只产品比较：收益看今年以来，回撤看最大回撤绝对值。3 月成立的产品仅约 8 个月历史，“今年以来”约等于“成立以来”。不同成立日的累计收益不宜直接作为同周期排名。代表公司根据基金管理人或指数编制方公开资料整理，实际持仓会随调仓变化。"),
       /*#__PURE__*/React.createElement("span", null, data.meta.source)));
 }
 function ETF6040PageV12() {
