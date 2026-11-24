@@ -3466,9 +3466,9 @@ window.__etf6040Data = {
     note: "这里的 60/40 不是传统股债配置，而是香港上市、以港股为主并配置约四成境外股票的跨市场 ETF。页面按策略性质分为科技、红利与现金流、哑铃三类。"
   },
   categories: [
-    {key:"tech", label:"科技类", en:"TECH GROWTH", role:"进攻弹性", color:"#4b63d3", volatility:"21%–35%", drawdown:"29%–39%", description:"港股端配置恒生科技或科技主题股，海外端聚焦美股科技七巨头、AI 算力或韩国存储链。"},
     {key:"income", label:"红利 / 现金流类", en:"INCOME & CASH FLOW", role:"防御底仓", color:"#178267", volatility:"11%–13%", drawdown:"5%–12%", description:"以高股息、低波与自由现金流为核心，海外端覆盖美国、亚太与日本现金流资产。"},
-    {key:"barbell", label:"哑铃类", en:"BARBELL", role:"攻守双驱动", color:"#c46b2b", volatility:"12%–29%", drawdown:"9%–20%", description:"港股高息承担防御，海外成长或亚洲科技提供弹性，把两类驱动放进同一只产品。"}
+    {key:"barbell", label:"哑铃类", en:"BARBELL", role:"攻守双驱动", color:"#c46b2b", volatility:"12%–29%", drawdown:"9%–20%", description:"港股高息承担防御，海外成长或亚洲科技提供弹性，把两类驱动放进同一只产品。"},
+    {key:"tech", label:"科技类", en:"TECH GROWTH", role:"进攻弹性", color:"#4b63d3", volatility:"21%–35%", drawdown:"29%–39%", description:"港股端配置恒生科技或科技主题股，海外端聚焦美股科技七巨头、AI 算力或韩国存储链。"}
   ],
   findings: [
     {metric:"60.31pp", title:"年内收益首尾差距超过 60 个百分点", text:"3441 年内上涨 30.86%，3489 下跌 29.45%。差异主要来自境外 40% 配置方向，而不是“是否跨境”本身。"},
@@ -5689,8 +5689,6 @@ function ETF6040PageV12() {
         /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", null, "策略类型"), /*#__PURE__*/React.createElement("strong", null, data.categories.length, " 类")),
         /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", null, "年内首尾差"), /*#__PURE__*/React.createElement("strong", null, data.findings[0].metric)),
         /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", null, "数据截至"), /*#__PURE__*/React.createElement("strong", null, data.meta.asOf)))),
-    /*#__PURE__*/React.createElement(ETF6040StrategyMapV12, {data}),
-    /*#__PURE__*/React.createElement(ETF6040FindingsV12, {findings:data.findings}),
     /*#__PURE__*/React.createElement(ETF6040TableV12, {data}),
     /*#__PURE__*/React.createElement("footer", {className:"v2-footer"}, /*#__PURE__*/React.createElement("span", null, "ETF 研究工具箱 · 60/40 ETF 策略分类"), /*#__PURE__*/React.createElement("span", null, "基于公开数据的客观分析，不构成投资建议")));
 }
