@@ -2450,6 +2450,7 @@ body {
 .v12-strategy-card-head span { color:var(--strategy-color); font-size:11px; font-weight:800; letter-spacing:.12em; }
 .v12-strategy-card-head strong { font-family:var(--mono); font-size:34px; line-height:1; }
 .v12-strategy-card h3 { margin:12px 0 9px; font-family:var(--serif); font-size:26px; font-weight:500; }
+.v12-strategy-card:last-child:nth-child(odd) { grid-column:1 / -1; }
 .v12-strategy-card > p { min-height:50px; margin:0; color:var(--ink-2); font-size:13px; line-height:1.72; }
 .v12-strategy-metrics { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; margin:22px 0 15px; background:#dfe5ef; }
 .v12-strategy-metrics div { padding:11px 12px; background:#fff; }
@@ -3459,16 +3460,15 @@ window.__brokerageData = {"guosen":{"key":"guosen","name":"国信金工","color"
 /* data-6040.js */
 window.__etf6040Data = {
   meta: {
-    title: "14 只港股通 60/40 ETF",
+    title: "13 只港股通 60/40 ETF",
     asOf: "2026-11-24",
     source: "Wind；规模与费率、收益与风险指标截至 2026-11-24",
-    note: "这里的 60/40 不是传统股债配置，而是香港上市、以港股为主并配置约四成境外股票的跨市场 ETF。页面按策略性质分为科技、红利与现金流、哑铃、均衡四类。"
+    note: "这里的 60/40 不是传统股债配置，而是香港上市、以港股为主并配置约四成境外股票的跨市场 ETF。页面按策略性质分为科技、红利与现金流、哑铃三类。"
   },
   categories: [
     {key:"tech", label:"科技类", en:"TECH GROWTH", role:"进攻弹性", color:"#4b63d3", volatility:"21%–35%", drawdown:"29%–39%", description:"港股端配置恒生科技或科技主题股，海外端聚焦美股科技七巨头、AI 算力或韩国存储链。"},
     {key:"income", label:"红利 / 现金流类", en:"INCOME & CASH FLOW", role:"防御底仓", color:"#178267", volatility:"11%–13%", drawdown:"5%–12%", description:"以高股息、低波与自由现金流为核心，海外端覆盖美国、亚太与日本现金流资产。"},
-    {key:"barbell", label:"哑铃类", en:"BARBELL", role:"攻守双驱动", color:"#c46b2b", volatility:"12%–29%", drawdown:"9%–20%", description:"港股高息承担防御，海外成长或亚洲科技提供弹性，把两类驱动放进同一只产品。"},
-    {key:"balanced", label:"均衡类", en:"BALANCED", role:"区域分散", color:"#7256a8", volatility:"14.87%", drawdown:"18.69%", description:"港股与东盟股票按跨境收入关系选股，金融权重较高，更接近区域宽基。"}
+    {key:"barbell", label:"哑铃类", en:"BARBELL", role:"攻守双驱动", color:"#c46b2b", volatility:"12%–29%", drawdown:"9%–20%", description:"港股高息承担防御，海外成长或亚洲科技提供弹性，把两类驱动放进同一只产品。"}
   ],
   findings: [
     {metric:"60.31pp", title:"年内收益首尾差距超过 60 个百分点", text:"3441 年内上涨 30.86%，3489 下跌 29.45%。差异主要来自境外 40% 配置方向，而不是“是否跨境”本身。"},
@@ -3484,7 +3484,6 @@ window.__etf6040Data = {
     {code:"3477.HK", name:"平安东西精选", category:"barbell", overseas:"美国大盘股", inception:"2025-09-09", ytd:-2.06, oneYear:-1.43, since:1.23, vol:11.87, drawdown:-11.45, scale:6.10, fee:0.55},
     {code:"3535.HK", name:"南方港日现金流", category:"income", overseas:"日本现金流", inception:"2026-03-27", ytd:-5.71, oneYear:null, since:-5.71, vol:11.68, drawdown:-11.22, scale:5.03, fee:0.99},
     {code:"3431.HK", name:"南方港韩科技", category:"tech", overseas:"韩国半导体", inception:"2025-09-25", ytd:-5.78, oneYear:-1.19, since:-7.20, vol:35.33, drawdown:-38.91, scale:7.20, fee:0.99},
-    {code:"2805.HK", name:"银河博时东盟", category:"balanced", overseas:"东盟", inception:"2026-01-28", ytd:-17.89, oneYear:null, since:-17.89, vol:14.87, drawdown:-18.69, scale:3.85, fee:0.50},
     {code:"3169.HK", name:"嘉实科技50", category:"tech", overseas:"美国科技", inception:"2026-03-06", ytd:-18.45, oneYear:null, since:-18.45, vol:22.85, drawdown:-28.63, scale:4.11, fee:0.99},
     {code:"3140.HK", name:"华夏港美AI", category:"tech", overseas:"美国 AI", inception:"2026-03-18", ytd:-21.30, oneYear:null, since:-21.30, vol:25.31, drawdown:-30.71, scale:4.32, fee:0.90},
     {code:"3406.HK", name:"平安科技精选", category:"tech", overseas:"美国科技", inception:"2025-09-09", ytd:-23.68, oneYear:-23.93, since:-25.03, vol:20.97, drawdown:-29.67, scale:4.93, fee:0.55},
@@ -5597,7 +5596,7 @@ function ETF6040PortalEntryV12({onOpen}) {
     /*#__PURE__*/React.createElement("div", {className:"v9-entry-copy"},
       /*#__PURE__*/React.createElement("div", {className:"v2-eyebrow"}, "CROSS-MARKET ETF SPECIAL"),
       /*#__PURE__*/React.createElement("h2", {id:"portal-6040-title"}, "港股通 60/40 ETF"),
-      /*#__PURE__*/React.createElement("p", null, "14 只跨市场 ETF 按策略性质分成科技、红利与现金流、哑铃、均衡四类。"),
+      /*#__PURE__*/React.createElement("p", null, "13 只跨市场 ETF 按策略性质分成科技、红利与现金流、哑铃三类。"),
       /*#__PURE__*/React.createElement("div", {className:"v9-entry-stats"},
         /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, data.products.length), "只产品"),
         /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, data.categories.length), "类策略"),
@@ -5618,7 +5617,7 @@ function ETF6040PortalEntryV12({onOpen}) {
 function ETF6040StrategyMapV12({data}) {
   return /*#__PURE__*/React.createElement("section", {className:"v12-section v12-section-shell", "aria-labelledby":"v12-strategy-title"},
     /*#__PURE__*/React.createElement("div", {className:"v12-section-head"},
-      /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {className:"v2-eyebrow"}, "STRATEGY MAP"), /*#__PURE__*/React.createElement("h2", {id:"v12-strategy-title"}, "四类策略，四种组合角色")),
+      /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {className:"v2-eyebrow"}, "STRATEGY MAP"), /*#__PURE__*/React.createElement("h2", {id:"v12-strategy-title"}, "三类策略，三种组合角色")),
       /*#__PURE__*/React.createElement("p", null, "同样是 60/40 结构，境外 40% 的资产选择会让收益、波动和回撤走向完全不同。")),
     /*#__PURE__*/React.createElement("div", {className:"v12-strategy-grid"}, data.categories.map(category => {
       const products = data.products.filter(item => item.category === category.key);
