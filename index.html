@@ -2498,7 +2498,6 @@ body {
 .v12-metric-badge { display:inline-flex; align-items:center; min-height:25px; margin-top:7px; padding:3px 8px; border:1px solid; border-radius:999px; font-size:14px; font-weight:800; line-height:1; white-space:nowrap; }
 .v12-metric-badge--return { color:#a6412f; border-color:#e5a393; background:#fff2ee; }
 .v12-metric-badge--drawdown { color:#0e7552; border-color:#8bc8ae; background:#ecfaf3; }
-.v12-metric-badge--sharpe { color:#2849a8; border-color:#9aafe8; background:#eef2ff; }
 .v12-number { font-family:var(--mono); font-weight:700; white-space:nowrap; }
 .v12-number.positive { color:#c84b35; }
 .v12-number.negative { color:#168259; }
@@ -3488,10 +3487,10 @@ window.__etf6040Data = {
     {metric:"85.8%", title:"3441 提供唯一较长的可验证记录", text:"其跟踪指数过去两年累计上涨 85.8%，最大回撤约 13%，年化波动约 11.7%，兼具收益、低波动与长样本。"}
   ],
   products: [
-    {code:"3441.HK", name:"南方东西精选", category:"income", overseas:"美国自由现金流", leaders:"苹果 · 微软 · 博通", localHongKong:true, inception:"2025-03-31", ytd:30.86, oneYear:32.34, since:75.56, vol:11.23, drawdown:-8.16, sharpe:2.7, scale:35.83, fee:0.99},
+    {code:"3441.HK", name:"南方东西精选", category:"income", overseas:"美国自由现金流", leaders:"苹果 · 微软 · 博通", localHongKong:true, inception:"2025-03-31", ytd:30.86, oneYear:32.34, since:75.56, vol:11.23, drawdown:-8.16, scale:35.83, fee:0.99},
     {code:"3473.HK", name:"南方亚洲科技股息", category:"barbell", overseas:"中国台湾 / 日本 / 韩国 / 新加坡", leaders:"台积电 · 三星电子 · SK海力士", localHongKong:true, inception:"2026-03-27", ytd:17.39, oneYear:null, since:17.39, vol:28.61, drawdown:-19.91, scale:4.89, fee:0.99},
     {code:"3483.HK", name:"易方达亚太高股息", category:"income", overseas:"日本、澳大利亚", leaders:"必和必拓 · 日本电信电话 · 日本烟草", inception:"2025-09-26", ytd:10.89, oneYear:13.59, since:20.25, vol:13.13, drawdown:-11.41, scale:5.23, fee:0.50},
-    {code:"3428.HK", name:"GX国寿港美", category:"barbell", overseas:"美国大型非金融", leaders:"苹果 · 英伟达 · 微软", inception:"2026-03-27", ytd:9.72, oneYear:null, since:9.72, vol:14.06, drawdown:-9.23, sharpe:2.8, scale:7.58, fee:0.75},
+    {code:"3428.HK", name:"GX国寿港美", category:"barbell", overseas:"美国大型非金融", leaders:"苹果 · 英伟达 · 微软", inception:"2026-03-27", ytd:9.72, oneYear:null, since:9.72, vol:14.06, drawdown:-9.23, scale:7.58, fee:0.75},
     {code:"3488.HK", name:"惠理港美红利低波", category:"income", overseas:"美国低波红利", leaders:"礼来 · Visa · 苹果", inception:"2026-03-27", ytd:7.58, oneYear:null, since:7.58, vol:10.97, drawdown:-5.08, scale:10.19, fee:0.90},
     {code:"3477.HK", name:"平安东西精选", category:"barbell", overseas:"美国大盘股", leaders:"英伟达 · 苹果 · 微软", inception:"2025-09-09", ytd:-2.06, oneYear:-1.43, since:1.23, vol:11.87, drawdown:-11.45, scale:6.10, fee:0.55},
     {code:"3535.HK", name:"南方港日现金流", category:"income", overseas:"日本现金流", leaders:"本田汽车 · 佳能 · 软银", inception:"2026-03-27", ytd:-5.71, oneYear:null, since:-5.71, vol:11.68, drawdown:-11.22, scale:5.03, fee:0.99},
@@ -5658,7 +5657,6 @@ function ETF6040TableV12({data}) {
   const categories = activeCategory === "all" ? data.categories : data.categories.filter(item => item.key === activeCategory);
   const bestYtd = Math.max(...data.products.map(item => item.ytd).filter(Number.isFinite));
   const smallestDrawdown = Math.max(...data.products.map(item => item.drawdown).filter(Number.isFinite));
-  const bestSharpe = Math.max(...data.products.map(item => item.sharpe).filter(Number.isFinite));
   return /*#__PURE__*/React.createElement("section", {className:"v12-comparison", "aria-labelledby":"v12-comparison-title"},
     /*#__PURE__*/React.createElement("div", {className:"v12-section-head"},
       /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {className:"v2-eyebrow"}, "PRODUCT COMPARISON"), /*#__PURE__*/React.createElement("h2", {id:"v12-comparison-title"}, data.products.length, " 只 ETF 按策略分组")),
@@ -5684,13 +5682,13 @@ function ETF6040TableV12({data}) {
               /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", {className:"v12-overseas-direction"}, item.overseas), /*#__PURE__*/React.createElement("small", {className:"v12-overseas-leaders"}, /*#__PURE__*/React.createElement("b", null, "代表："), item.leaders)),
               /*#__PURE__*/React.createElement("td", {className:item.ytd === bestYtd ? "v12-metric-highlight" : undefined}, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.ytd}), item.ytd === bestYtd && /*#__PURE__*/React.createElement("span", {className:"v12-metric-badge v12-metric-badge--return"}, "年内收益最高")),
               /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.since})),
-              /*#__PURE__*/React.createElement("td", {className:item.sharpe === bestSharpe ? "v12-metric-highlight" : undefined}, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.vol, signed:false}), item.sharpe === bestSharpe && /*#__PURE__*/React.createElement("span", {className:"v12-metric-badge v12-metric-badge--sharpe"}, "夏普最高 · ", item.sharpe.toFixed(1))),
+              /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.vol, signed:false})),
               /*#__PURE__*/React.createElement("td", {className:item.drawdown === smallestDrawdown ? "v12-metric-highlight" : undefined}, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.drawdown, signed:false}), item.drawdown === smallestDrawdown && /*#__PURE__*/React.createElement("span", {className:"v12-metric-badge v12-metric-badge--drawdown"}, "回撤最小")),
               /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("span", {className:"v12-number"}, item.scale.toFixed(2)), /*#__PURE__*/React.createElement("small", null, " 亿港元")),
               /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.fee, signed:false}))))))));
     }),
     /*#__PURE__*/React.createElement("div", {className:"v12-table-note"},
-      /*#__PURE__*/React.createElement("p", null, "标记按全部 13 只产品比较：收益看今年以来，回撤看最大回撤绝对值；夏普沿用专题原有的 2% 无风险利率口径。3 月成立的产品仅约 8 个月历史，“今年以来”约等于“成立以来”。不同成立日的累计收益不宜直接作为同周期排名。代表公司根据基金管理人或指数编制方公开资料整理，实际持仓会随调仓变化。"),
+      /*#__PURE__*/React.createElement("p", null, "标记按全部 13 只产品比较：收益看今年以来，回撤看最大回撤绝对值。3 月成立的产品仅约 8 个月历史，“今年以来”约等于“成立以来”。不同成立日的累计收益不宜直接作为同周期排名。代表公司根据基金管理人或指数编制方公开资料整理，实际持仓会随调仓变化。"),
       /*#__PURE__*/React.createElement("span", null, data.meta.source)));
 }
 function ETF6040PageV12() {
