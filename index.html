@@ -2486,11 +2486,14 @@ body {
 .v12-table-scroll td { padding:17px 12px; border-bottom:1px solid #e0e5ed; font-size:15px; vertical-align:middle; }
 .v12-table-scroll tr:last-child td { border-bottom:0; }
 .v12-table-scroll td:first-child { min-width:170px; }
-.v12-table-scroll td:nth-child(2) { min-width:170px; color:var(--ink-2); }
+.v12-table-scroll td:nth-child(2) { min-width:230px; color:var(--ink-2); }
 .v12-product strong { display:block; margin-bottom:4px; font-size:16px; }
 .v12-product-badge { display:inline-flex; align-items:center; min-height:24px; margin:0 0 5px; padding:2px 8px; color:#173f7d; border:1px solid #9db6dd; background:#edf4ff; font-size:13px; font-weight:800; line-height:1; }
 .v12-product code,.v12-product small { display:block; margin-top:4px; color:var(--muted); font-family:var(--mono); font-size:13px; }
 .v12-table-scroll td small { font-size:13px; }
+.v12-overseas-direction { color:#2f3e57; font-size:15px; font-weight:800; line-height:1.45; }
+.v12-overseas-leaders { display:block; max-width:250px; margin-top:7px; color:#6d7990; font-size:13px; line-height:1.55; }
+.v12-overseas-leaders b { color:#173f7d; font-weight:800; }
 .v12-number { font-family:var(--mono); font-weight:700; white-space:nowrap; }
 .v12-number.positive { color:#c84b35; }
 .v12-number.negative { color:#168259; }
@@ -3467,7 +3470,7 @@ window.__etf6040Data = {
     title: "13 只港股通 60/40 ETF",
     asOf: "2026-11-24",
     source: "Wind；规模与费率、收益与风险指标截至 2026-11-24",
-    note: "这里的 60/40 不是传统股债配置，而是香港上市、以港股为主并配置约四成境外股票的跨市场 ETF。页面按策略性质分为科技、红利与现金流、哑铃三类。"
+    note: "这里的 60/40 不是传统股债配置，而是香港上市、以港股为主并配置约四成境外股票的跨市场 ETF。页面按策略性质分为红利与现金流、哑铃、科技三类。"
   },
   categories: [
     {key:"income", label:"红利 / 现金流类", en:"INCOME & CASH FLOW", role:"防御底仓", color:"#178267", volatility:"11%–13%", drawdown:"5%–12%", description:"以高股息、低波与自由现金流为核心，海外端覆盖美国、亚太与日本现金流资产。"},
@@ -3480,19 +3483,19 @@ window.__etf6040Data = {
     {metric:"85.8%", title:"3441 提供唯一较长的可验证记录", text:"其跟踪指数过去两年累计上涨 85.8%，最大回撤约 13%，年化波动约 11.7%，兼具收益、低波动与长样本。"}
   ],
   products: [
-    {code:"3441.HK", name:"南方东西精选", category:"income", overseas:"美国自由现金流", localHongKong:true, inception:"2025-03-31", ytd:30.86, oneYear:32.34, since:75.56, vol:11.23, drawdown:-8.16, scale:35.83, fee:0.99},
-    {code:"3473.HK", name:"南方亚洲科技股息", category:"barbell", overseas:"中国台湾 / 日本 / 韩国 / 新加坡", localHongKong:true, inception:"2026-03-27", ytd:17.39, oneYear:null, since:17.39, vol:28.61, drawdown:-19.91, scale:4.89, fee:0.99},
-    {code:"3483.HK", name:"易方达亚太高股息", category:"income", overseas:"日本、澳大利亚", inception:"2025-09-26", ytd:10.89, oneYear:13.59, since:20.25, vol:13.13, drawdown:-11.41, scale:5.23, fee:0.50},
-    {code:"3428.HK", name:"GX国寿港美", category:"barbell", overseas:"美国大型非金融", inception:"2026-03-27", ytd:9.72, oneYear:null, since:9.72, vol:14.06, drawdown:-9.23, scale:7.58, fee:0.75},
-    {code:"3488.HK", name:"惠理港美红利低波", category:"income", overseas:"美国低波红利", inception:"2026-03-27", ytd:7.58, oneYear:null, since:7.58, vol:10.97, drawdown:-5.08, scale:10.19, fee:0.90},
-    {code:"3477.HK", name:"平安东西精选", category:"barbell", overseas:"美国大盘股", inception:"2025-09-09", ytd:-2.06, oneYear:-1.43, since:1.23, vol:11.87, drawdown:-11.45, scale:6.10, fee:0.55},
-    {code:"3535.HK", name:"南方港日现金流", category:"income", overseas:"日本现金流", inception:"2026-03-27", ytd:-5.71, oneYear:null, since:-5.71, vol:11.68, drawdown:-11.22, scale:5.03, fee:0.99},
-    {code:"3431.HK", name:"南方港韩科技", category:"tech", overseas:"韩国半导体", inception:"2025-09-25", ytd:-5.78, oneYear:-1.19, since:-7.20, vol:35.33, drawdown:-38.91, scale:7.20, fee:0.99},
-    {code:"3169.HK", name:"嘉实科技50", category:"tech", overseas:"美国科技", inception:"2026-03-06", ytd:-18.45, oneYear:null, since:-18.45, vol:22.85, drawdown:-28.63, scale:4.11, fee:0.99},
-    {code:"3140.HK", name:"华夏港美AI", category:"tech", overseas:"美国 AI", inception:"2026-03-18", ytd:-21.30, oneYear:null, since:-21.30, vol:25.31, drawdown:-30.71, scale:4.32, fee:0.90},
-    {code:"3406.HK", name:"平安科技精选", category:"tech", overseas:"美国科技", inception:"2025-09-09", ytd:-23.68, oneYear:-23.93, since:-25.03, vol:20.97, drawdown:-29.67, scale:4.93, fee:0.55},
-    {code:"3442.HK", name:"南方港美科技", category:"tech", overseas:"美国科技七巨头", inception:"2025-03-31", ytd:-25.13, oneYear:-25.21, since:-13.26, vol:21.48, drawdown:-31.14, scale:5.44, fee:0.99},
-    {code:"3489.HK", name:"易方达AI", category:"tech", overseas:"全球 AI 精选", inception:"2025-09-26", ytd:-29.45, oneYear:-29.66, since:-34.50, vol:27.39, drawdown:-38.67, scale:3.81, fee:0.90}
+    {code:"3441.HK", name:"南方东西精选", category:"income", overseas:"美国自由现金流", leaders:"苹果 · 微软 · 博通", localHongKong:true, inception:"2025-03-31", ytd:30.86, oneYear:32.34, since:75.56, vol:11.23, drawdown:-8.16, scale:35.83, fee:0.99},
+    {code:"3473.HK", name:"南方亚洲科技股息", category:"barbell", overseas:"中国台湾 / 日本 / 韩国 / 新加坡", leaders:"台积电 · 三星电子 · SK海力士", localHongKong:true, inception:"2026-03-27", ytd:17.39, oneYear:null, since:17.39, vol:28.61, drawdown:-19.91, scale:4.89, fee:0.99},
+    {code:"3483.HK", name:"易方达亚太高股息", category:"income", overseas:"日本、澳大利亚", leaders:"必和必拓 · 日本电信电话 · 日本烟草", inception:"2025-09-26", ytd:10.89, oneYear:13.59, since:20.25, vol:13.13, drawdown:-11.41, scale:5.23, fee:0.50},
+    {code:"3428.HK", name:"GX国寿港美", category:"barbell", overseas:"美国大型非金融", leaders:"苹果 · 英伟达 · 微软", inception:"2026-03-27", ytd:9.72, oneYear:null, since:9.72, vol:14.06, drawdown:-9.23, scale:7.58, fee:0.75},
+    {code:"3488.HK", name:"惠理港美红利低波", category:"income", overseas:"美国低波红利", leaders:"礼来 · Visa · 苹果", inception:"2026-03-27", ytd:7.58, oneYear:null, since:7.58, vol:10.97, drawdown:-5.08, scale:10.19, fee:0.90},
+    {code:"3477.HK", name:"平安东西精选", category:"barbell", overseas:"美国大盘股", leaders:"英伟达 · 苹果 · 微软", inception:"2025-09-09", ytd:-2.06, oneYear:-1.43, since:1.23, vol:11.87, drawdown:-11.45, scale:6.10, fee:0.55},
+    {code:"3535.HK", name:"南方港日现金流", category:"income", overseas:"日本现金流", leaders:"本田汽车 · 佳能 · 软银", inception:"2026-03-27", ytd:-5.71, oneYear:null, since:-5.71, vol:11.68, drawdown:-11.22, scale:5.03, fee:0.99},
+    {code:"3431.HK", name:"南方港韩科技", category:"tech", overseas:"韩国半导体", leaders:"SK Square · 三星电机 · SK海力士", inception:"2025-09-25", ytd:-5.78, oneYear:-1.19, since:-7.20, vol:35.33, drawdown:-38.91, scale:7.20, fee:0.99},
+    {code:"3169.HK", name:"嘉实科技50", category:"tech", overseas:"美国科技", leaders:"英伟达 · 微软 · 苹果", inception:"2026-03-06", ytd:-18.45, oneYear:null, since:-18.45, vol:22.85, drawdown:-28.63, scale:4.11, fee:0.99},
+    {code:"3140.HK", name:"华夏港美AI", category:"tech", overseas:"美国 AI", leaders:"苹果 · 微软 · 英伟达", inception:"2026-03-18", ytd:-21.30, oneYear:null, since:-21.30, vol:25.31, drawdown:-30.71, scale:4.32, fee:0.90},
+    {code:"3406.HK", name:"平安科技精选", category:"tech", overseas:"美国科技", leaders:"苹果 · 英伟达 · Alphabet", inception:"2025-09-09", ytd:-23.68, oneYear:-23.93, since:-25.03, vol:20.97, drawdown:-29.67, scale:4.93, fee:0.55},
+    {code:"3442.HK", name:"南方港美科技", category:"tech", overseas:"美国科技七巨头", leaders:"苹果 · 微软 · 亚马逊", inception:"2025-03-31", ytd:-25.13, oneYear:-25.21, since:-13.26, vol:21.48, drawdown:-31.14, scale:5.44, fee:0.99},
+    {code:"3489.HK", name:"易方达AI", category:"tech", overseas:"全球 AI 精选", leaders:"英伟达 · 美光科技 · 博通", inception:"2025-09-26", ytd:-29.45, oneYear:-29.66, since:-34.50, vol:27.39, drawdown:-38.67, scale:3.81, fee:0.90}
   ]
 };
 
@@ -5670,7 +5673,7 @@ function ETF6040TableV12({data}) {
             /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, ["产品", "海外 40% 方向", "今年以来", "成立以来", "年化波动", "最大回撤", "规模", "管理费率"].map(label => /*#__PURE__*/React.createElement("th", {key:label}, label)))),
             /*#__PURE__*/React.createElement("tbody", null, rows.map(item => /*#__PURE__*/React.createElement("tr", {key:item.code},
               /*#__PURE__*/React.createElement("td", {className:"v12-product"}, /*#__PURE__*/React.createElement("strong", null, item.name), item.localHongKong && /*#__PURE__*/React.createElement("span", {className:"v12-product-badge"}, "港股本地股"), /*#__PURE__*/React.createElement("code", null, item.code), /*#__PURE__*/React.createElement("small", null, "成立 ", item.inception)),
-              /*#__PURE__*/React.createElement("td", null, item.overseas),
+              /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", {className:"v12-overseas-direction"}, item.overseas), /*#__PURE__*/React.createElement("small", {className:"v12-overseas-leaders"}, /*#__PURE__*/React.createElement("b", null, "代表："), item.leaders)),
               /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.ytd})),
               /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.since})),
               /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.vol, signed:false})),
@@ -5679,7 +5682,7 @@ function ETF6040TableV12({data}) {
               /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(ETF6040ValueV12, {value:item.fee, signed:false}))))))));
     }),
     /*#__PURE__*/React.createElement("div", {className:"v12-table-note"},
-      /*#__PURE__*/React.createElement("p", null, "3 月成立的产品仅约 8 个月历史，“今年以来”约等于“成立以来”。不同成立日的累计收益不宜直接作为同周期排名。"),
+      /*#__PURE__*/React.createElement("p", null, "3 月成立的产品仅约 8 个月历史，“今年以来”约等于“成立以来”。不同成立日的累计收益不宜直接作为同周期排名。代表公司根据基金管理人或指数编制方公开资料整理，实际持仓会随调仓变化。"),
       /*#__PURE__*/React.createElement("span", null, data.meta.source)));
 }
 function ETF6040PageV12() {
